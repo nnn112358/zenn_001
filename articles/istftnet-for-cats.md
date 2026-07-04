@@ -74,20 +74,11 @@ $$
 
 **従来のHiFi-GAN**:波形の長さまで畳み込みで一気に拡大。
 
-```mermaid
-graph LR
-    M1["mel<br/>80 × T"] --> U1["転置畳み込みで<br/>波形長まで ×256"] --> W1["波形 1ch"]
-```
+![従来のHiFi-GAN（全部畳み込み）](/images/dg-istftnet-1.png)
 
 **iSTFTNet(C8C8I)**:途中まで拡大してから iSTFT にバトンタッチ。
 
-```mermaid
-graph LR
-    M2["mel<br/>80 × T"] --> U2["転置畳み込み ×64<br/>周波数次元を9まで削減"]
-    U2 --> MP["振幅9 + 位相9<br/>(exp / sin)"]
-    MP --> I["iSTFT<br/>FFT=16, hop=4"]
-    I --> W2["波形 1ch"]
-```
+![iSTFTNet（C8C8I）のデータフロー](/images/dg-istftnet-2.png)
 
 ## どこまで iSTFT に置き換える? ― 「置き換えすぎ」は崩壊する
 
@@ -125,12 +116,7 @@ graph LR
 
 iSTFTNetは「**畳み込みを iSTFT に部分的に置き換える**」という潮流の起点になりました。
 
-```mermaid
-graph LR
-    HG["HiFi-GAN (2020)<br/>全部 畳み込み"] --> IS["iSTFTNet (2022)<br/>終盤を iSTFT に"]
-    IS --> MBI["MB-iSTFT-VITS (2022)<br/>VITSに iSTFT + マルチバンド"]
-    IS --> VO["Vocos (2023)<br/>全部 iSTFT + ConvNeXt"]
-```
+![iSTFTを部分適用する系譜](/images/dg-istftnet-3.png)
 
 - **MB-iSTFT-VITS** … VITS本体に iSTFT とマルチバンドを持ち込んで軽量化。
 - **Vocos** … iSTFTNetが「置き換えすぎると崩壊する」と諦めた部分を、**ConvNeXt という良い骨格をフレームレートで回す**ことで克服し、**アップサンプリングを完全に廃止**(全部 iSTFT)。CPUで HiFi-GAN の約13倍速。

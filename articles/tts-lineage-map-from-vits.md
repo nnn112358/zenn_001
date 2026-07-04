@@ -51,26 +51,7 @@ VITS は次の3つを組み合わせています。
 
 VITS が生まれる前の「音響モデル(テキスト → メルスペクトログラム)」の流れです。**自己回帰(AR)から非自己回帰(並列)へ**、そして**外部アライナーの排除**へ、という2つの潮流があります。
 
-```mermaid
-graph TD
-    T1["Tacotron (2017)<br/>自己回帰 mel"]
-    T2["Tacotron 2 (2017)<br/>+WaveNet"]
-    TF["Transformer TTS (2018)"]
-    FS["FastSpeech (2019)<br/>非AR / 並列"]
-    FS2["FastSpeech 2 (2020)<br/>+音高・エネルギー"]
-    FP["FastPitch (2020)"]
-    GT["Glow-TTS (2020)<br/>Flow + MAS"]
-    VITS["VITS (2021)<br/>単段E2E"]
-
-    T1 --> T2
-    T1 --> TF
-    T2 --> FS
-    TF --> FS
-    FS --> FS2
-    FS --> FP
-    FS --> GT
-    GT -->|"+ HiFi-GAN + VAE"| VITS
-```
+![音響モデル系統](/images/dg-lineage-1.png)
 
 ポイントは **Glow-TTS(2020)** が導入した **MAS(Monotonic Alignment Search)**。これにより、Tacotron 系が必要としていた「注意機構によるアライメント学習」を外部から与える必要がなくなり、学習が安定しました。この MAS がそのまま VITS に受け継がれます。
 
@@ -80,35 +61,7 @@ graph TD
 
 VITS が単段 E2E を確立したあと、**日本語・多言語・軽量化・歌声**など各方向に爆発的に派生しました。
 
-```mermaid
-graph TD
-    VITS["VITS (2021)"]
-    VITS2["VITS2 (2023)<br/>SDP + discriminator"]
-    YT["YourTTS (2022)<br/>zero-shot"]
-    SOVITS["so-vits-svc (2023)<br/>SoftVC content encoder"]
-    RVC["RVC<br/>Retrieval VC"]
-    GPTSO["GPT-SoVITS (2024)<br/>GPT text→semantic"]
-    BV["Bert-VITS2<br/>多言語BERT"]
-    SBV["Style-Bert-VITS2<br/>JP-Extra + スタイル"]
-    MELO["MeloTTS<br/>VITS+VITS2+BertVITS2 統合"]
-    OV["OpenVoice<br/>MeloTTS基盤 + クローン"]
-    PIPER["Piper<br/>ONNX軽量 / エッジ"]
-    MBI["MB-iSTFT-VITS<br/>iSTFT軽量化"]
-    FISH["Fish-Speech (2024)<br/>LLM + Firefly-GAN へ転換"]
-
-    VITS --> VITS2
-    VITS --> YT
-    VITS --> SOVITS
-    VITS --> MBI
-    VITS --> PIPER
-    SOVITS --> RVC
-    SOVITS --> GPTSO
-    VITS2 --> BV
-    BV --> SBV
-    VITS2 --> MELO
-    MELO --> OV
-    BV --> FISH
-```
+![VITS本流系統](/images/dg-lineage-2.png)
 
 :::message
 **MeloTTS は「VITS + VITS2 + Bert-VITS2」のマージ実装**であり、多言語対応の音声クローン OpenVoice(MyShell + MIT)の base-speaker になっています。「VITS 系の集大成的な実装」を探すなら MeloTTS が入口です。
@@ -120,27 +73,7 @@ graph TD
 
 「音響特徴 → 波形」を担うボコーダの流れです。大きく **GAN 系(HiFi-GAN)** と **自己回帰・線形予測系(LPCNet → FARGAN)** に分かれます。
 
-```mermaid
-graph TD
-    WN["WaveNet (2016)<br/>基礎"]
-    WR["WaveRNN (2018)"]
-    LPC["LPCNet (2019)<br/>WaveRNN + 線形予測 / CPUリアルタイム"]
-    FWG["FWGAN (2023)<br/>Framewise WaveGAN"]
-    FAR["FARGAN (2024)<br/>低複雑度 / Opusに実装"]
-    PWG["ParallelWaveGAN (2020)"]
-    HIFI["HiFi-GAN (2020)<br/>VITS標準ボコーダ"]
-    BIG["BigVGAN (2022)"]
-    VOCOS["Vocos (2023)<br/>iSTFTベース"]
-
-    WN --> WR
-    WR --> LPC
-    LPC --> FWG
-    FWG --> FAR
-    WN --> PWG
-    WN --> HIFI
-    HIFI --> BIG
-    HIFI --> VOCOS
-```
+![Vocoder系統](/images/dg-lineage-3.png)
 
 **HiFi-GAN** が VITS 本流の標準ボコーダとして広く使われる一方、**LPCNet → FWGAN → FARGAN** の系譜は「CPU・組込み・低電力」で戦う独立した流れです(FARGAN 論文自身は直接の前身を FWGAN / CARGAN としており、LPCNet は同一著者による低複雑度系譜の起点です)。FARGAN の実装は Opus コーデックのリポジトリに置かれ、**専用 C 実装なら極小サイズで実時間を大きく上回る**性能を出します。
 
@@ -150,23 +83,7 @@ graph TD
 
 2023年以降の「LM で音声を生成する」流れの土台が、この**ニューラルコーデック(離散トークン化)**です。
 
-```mermaid
-graph TD
-    VQ["VQ-VAE (2017)<br/>基礎"]
-    SS["SoundStream (2021)<br/>RVQ codec 発祥"]
-    AL["AudioLM (2022)<br/>codecトークンでLM"]
-    EN["EnCodec (2022, Meta)"]
-    DAC["DAC (2023, Descript)"]
-    DACVAE["DACVAE<br/>連続潜在化"]
-    FAC["FACodec<br/>属性分離 (NS3内)"]
-
-    VQ --> SS
-    SS --> AL
-    SS --> EN
-    SS --> DAC
-    DAC --> DACVAE
-    SS --> FAC
-```
+![Codec系統](/images/dg-lineage-4.png)
 
 **SoundStream** が発明した **RVQ(Residual Vector Quantization)** が、EnCodec・DAC へと最適化されていきます。この「音声を離散トークンにする」技術があって初めて、次の Codec LM 系が成立します。
 
@@ -174,24 +91,7 @@ graph TD
 
 EnCodec のトークンを **GPT のように自己回帰生成**するのが Codec LM 系です。zero-shot 音声クローンの主流になりました。
 
-```mermaid
-graph TD
-    AL["AudioLM (2022)"]
-    VALLE["VALL-E (2023)<br/>EnCodec + AR/NAR"]
-    VALLE2["VALL-E 2 (2024)<br/>人間並み"]
-    BARK["Bark (2023, Suno)"]
-    TOR["Tortoise (2022)<br/>AR + diffusion decoder"]
-    XTTS["XTTS / XTTS-v2 (Coqui)<br/>多言語"]
-    IDX["IndexTTS (2025, bilibili)<br/>産業レベル"]
-    VC["VoiceCraft<br/>遅延パターンAR"]
-
-    AL --> VALLE
-    VALLE --> VALLE2
-    VALLE --> VC
-    AL --> BARK
-    TOR --> XTTS
-    XTTS --> IDX
-```
+![Codec LM系統](/images/dg-lineage-5.png)
 
 :::message
 **IndexTTS は VITS 系ではなく Tortoise → XTTS → IndexTTS** という別系譜です。「zero-shot クローン = VITS 系」と思い込むと系譜を見誤ります。
@@ -201,25 +101,7 @@ graph TD
 
 拡散モデル(DDPM)と、その発展形である Flow Matching / Rectified Flow の流れです。**2024年の F5-TTS** が到達点の1つです。
 
-```mermaid
-graph TD
-    DDPM["DDPM (2020)<br/>基礎"]
-    GRAD["Grad-TTS (2021)<br/>score-based mel"]
-    MATCHA["Matcha-TTS (2024)<br/>conditional flow matching"]
-    FM["Flow Matching (2022, Lipman)<br/>基礎"]
-    VB["Voicebox (2023, Meta)<br/>flow matching + in-context"]
-    E2["E2-TTS (2024, MS)<br/>filler token簡素化"]
-    F5["F5-TTS (2024)<br/>DiT + ConvNeXt V2"]
-    DIT["DiT (2023, Peebles & Xie)<br/>画像生成由来の骨格"]
-
-    DDPM --> GRAD
-    GRAD --> MATCHA
-    FM --> VB
-    FM --> MATCHA
-    VB --> E2
-    E2 --> F5
-    DIT --> F5
-```
+![Diffusion / Flow Matching系統](/images/dg-lineage-6.png)
 
 **F5-TTS は E2-TTS の改良**であり、E2-TTS は **Voicebox の系譜**です。F5 は E2-TTS の頑健性の問題を、画像生成由来の **DiT(Diffusion Transformer)+ ConvNeXt V2** を持ち込むことで解決しました。「画像生成のアーキテクチャが音声に流れ込む」典型例です。
 
@@ -227,19 +109,7 @@ graph TD
 
 自己回帰でも拡散でもない第三の生成方式。**画像生成の MaskGIT** から音声へ伝播した系統です。
 
-```mermaid
-graph TD
-    MG["MaskGIT (2022, 画像)"]
-    MUSE["Muse (2023, text-to-image)"]
-    MAGVIT["MAGVIT-v2 (2023, 動画)"]
-    SST["SoundStorm (2023)<br/>非AR並列生成"]
-    MASKGCT["MaskGCT (2024, Amphion)<br/>Masked Generative Codec Transformer"]
-
-    MG --> MUSE
-    MG --> MAGVIT
-    MG --> SST
-    SST --> MASKGCT
-```
+![Masked Generative系統](/images/dg-lineage-7.png)
 
 **MaskGCT は MaskGIT(画像)→ SoundStorm(音声)→ MaskGCT** という、画像 → 音声のクロスドメインな系譜を持ちます。SpearTTS の3段構成(text → semantic → acoustic)も受け継いでいます。
 
@@ -247,20 +117,7 @@ graph TD
 
 最も新しい潮流。**ASR モデル(Whisper)や LLM(Qwen)を TTS に組み込む**流れです。
 
-```mermaid
-graph TD
-    WHISPER["Whisper (2022)<br/>ASR encoder"]
-    COSY["CosyVoice (2024, Alibaba)<br/>semantic tokens + LLM + CFM"]
-    COSY2["CosyVoice 2 (2024)<br/>streaming"]
-    COSY3["CosyVoice 3 (2025)"]
-    QWEN3["Qwen3 (LLM)"]
-    QWENTTS["Qwen3-TTS (2026)<br/>10言語ストリーミング"]
-
-    WHISPER --> COSY
-    COSY --> COSY2
-    COSY2 --> COSY3
-    QWEN3 --> QWENTTS
-```
+![LLM統合系統](/images/dg-lineage-8.png)
 
 **CosyVoice は ASR(音声認識)モデル由来の教師ありセマンティックトークン + LLM + Flow Matching** の構成です。これは Tortoise の「LLM + DDPM」の DDPM 部分を Flow Matching に置換したもの、と位置づけられます。ASR モデル由来のトークンが TTS を駆動する、という発想の転換がポイントです。
 
