@@ -1,5 +1,5 @@
 ---
-title: "猫でもわかるGAN ― VITSの\"G\"を図で理解する"
+title: "猫でもわかるGAN ― VITSを支える\"G\"(GAN)を図で理解する"
 emoji: "😼"
 type: "tech"
 topics: ["gan", "音声合成", "tts", "機械学習", "vits"]
@@ -8,7 +8,11 @@ published: false
 
 ## この記事について
 
-[VAE(V)](https://zenn.dev/nnn112358/articles/vae-for-cats)、[Flow(F)](https://zenn.dev/nnn112358/articles/flow-for-cats)ときたので、いよいよVITSの「**VAE + Flow + GAN**」の最後の頭文字、**GAN(敵対的生成ネットワーク / Generative Adversarial Network)** の "G" です。
+[VAE(V)](https://zenn.dev/nnn112358/articles/vae-for-cats)、[Flow(F)](https://zenn.dev/nnn112358/articles/flow-for-cats)ときたので、いよいよVITSを構成する「**VAE + Flow + GAN**」の最後のひとつ、**GAN(敵対的生成ネットワーク / Generative Adversarial Network)** です。
+
+:::message
+**用語の注意**:「VAE + Flow + GAN」はVITSを構成する3つの技術のこと。VITSの正式名称は **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(頭文字は V・I・T・S)で、VAE+Flow+GAN の頭文字を並べたものではありません。
+:::
 
 [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats)で「偽造者と鑑定士」の比喩を使いましたが、あれはGANの一応用でした。今回は**GANという仕組みそのもの**を、猫でもわかるように解説します。TTSの音づくりでGANがなぜ効くのかも、最後にちゃんと回収します。😼
 
@@ -155,9 +159,9 @@ flowchart LR
 - **ミニマックスゲーム**を解く。尤度を使わず「騙せるか」だけで学習 → 尖鋭・高品質だが**不安定**(モード崩壊・勾配消失)。
 - LSGAN・WGAN・feature matching 等の改良で安定化。多くは**TTSボコーダにも流用**。
 - TTSでは**ボコーダの主役**(MelGAN→HiFi-GAN→BigVGAN/Vocos)。**再構成損失だけの"こもった音"を、敵対的損失がシャープにする**。
-- **VITSの "G"** は波形への敵対的学習。VAE + Flow + GAN が1つのモデルに合流する。
+- **GAN** は VITS では波形への敵対的学習として働く。VAE + Flow + GAN が1つのモデルに合流する。
 
-これで **VITSの3文字(V・F・G)** が全部そろいました。次はいよいよ、この3つを1つに束ねる本体「VITS」そのものが書けます。
+これで **VITSの3本柱(VAE・Flow・GAN)** が全部そろいました。次はいよいよ、この3つを1つに束ねる本体「VITS」そのものが書けます。
 
 ## 参考リンク
 

@@ -1,5 +1,5 @@
 ---
-title: "猫でもわかるFlow(正規化フロー) ― VITSの\"F\"を図で理解する"
+title: "猫でもわかるFlow(正規化フロー) ― VITSを支える\"F\"(Flow)を図で理解する"
 emoji: "🐈‍⬛"
 type: "tech"
 topics: ["normalizingflow", "音声合成", "tts", "vits", "機械学習"]
@@ -9,6 +9,10 @@ published: false
 ## この記事について
 
 VITSは「**VAE + Flow + GAN**」の合わせ技だ、と[系譜の記事](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)で書きました。今回はその真ん中、**Flow(正規化フロー / Normalizing Flow)** の話です。
+
+:::message
+**用語の注意**:「VAE + Flow + GAN」はVITSを構成する3つの技術のこと。VITSの正式名称は **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(頭文字は V・I・T・S)で、VAE+Flow+GAN の頭文字を並べたものではありません。
+:::
 
 Glow-TTSの心臓部であり、WaveGlow(flowボコーダ)の本体であり、VITSの事前分布を支える——TTSのあちこちで効いている生成モデルの一族。名前は難しそうですが、**「可逆な変換でノイズを目的の形に整形する」**というシンプルな発想です。猫でもわかるように、図と最小限の数式で説明します。🐈‍⬛
 

@@ -1,5 +1,5 @@
 ---
-title: "猫でもわかるVAE ― VITSの\"V\"を図で理解する"
+title: "猫でもわかるVAE ― VITSを支える\"V\"(VAE)を図で理解する"
 emoji: "😺"
 type: "tech"
 topics: ["vae", "音声合成", "tts", "vits", "機械学習"]
@@ -8,7 +8,11 @@ published: false
 
 ## この記事について
 
-前回の[猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats)で、VITSの「**VAE + Flow + GAN**」の "F" を解説しました。今回はその頭文字、**VAE(変分オートエンコーダ / Variational Autoencoder)** の "V" です。
+前回の[猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats)で、VITSを構成する「**VAE + Flow + GAN**」のうち "F" を解説しました。今回はその3本柱のひとつ、**VAE(変分オートエンコーダ / Variational Autoencoder)** です。
+
+:::message
+**用語の注意**:「VAE + Flow + GAN」はVITSを構成する3つの技術のこと。VITSの正式名称は **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(頭文字は V・I・T・S)で、VAE+Flow+GAN の頭文字を並べたものではありません。
+:::
 
 VAEは、生成モデル三兄弟(VAE・GAN・Flow)の一角。ひとことで言うと **「オートエンコーダに"確率の衣"を着せて、新しいデータを生成できるようにしたもの」**。そして実は、**VITSはまるごと1つの条件付きVAE**なんです。猫でもわかるように、図と最小限の数式でいきます。😺
 
@@ -151,7 +155,7 @@ VAEには離散版のいとこ **VQ-VAE**(潜在を"コードブック"の離散
 - **VITSは条件付きVAEそのもの**。VAE + Flow + GAN が1つの式に合流する。
 - 離散版 **VQ-VAE** はコーデック(EnCodec/DAC)の源流。
 
-これで VITSの「**V**AE + **F**low + **G**AN」の3文字が全部つながりました。
+これで VITSの3本柱「**VAE** + **Flow** + **GAN**」が全部つながりました。
 
 ## 参考リンク
 
