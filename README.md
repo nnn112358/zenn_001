@@ -7,15 +7,15 @@
 - `articles/first-openjtalk.md` — はじめてのOpenJTalk
 - `articles/gpu-for-tts-training.md` — TTS学習向けのGPUの選び方
 - `articles/tts-lineage-map-from-vits.md` — VITSから見るTTS 10系統マップ(2016–2026)
-- `articles/what-is-mel-spectrogram.md` — メルスペクトログラムってなんだ？
+- `articles/what-is-mel-spectrogram.md` — 猫でもわかるメルスペクトログラム
 - `articles/hifigan-for-cats.md` — 猫でもわかるHiFi-GAN
-- `articles/g2p-for-cats.md` — 猫でもわかるG2P(下書き)
-- `articles/istftnet-for-cats.md` — 猫でもわかるiSTFTNet(下書き)
-- `articles/flow-for-cats.md` — 猫でもわかるFlow(正規化フロー)(下書き)
-- `articles/vae-for-cats.md` — 猫でもわかるVAE(下書き)
-- `articles/gan-for-cats.md` — 猫でもわかるGAN(下書き)
-- `articles/acoustic-model-for-cats.md` — 猫でもわかる音響モデル(下書き)
-- `articles/vits-for-cats.md` — 猫でもわかるVITS(総集編)(下書き)
+- `articles/g2p-for-cats.md` — 猫でもわかるG2P
+- `articles/istftnet-for-cats.md` — 猫でもわかるiSTFTNet
+- `articles/flow-for-cats.md` — 猫でもわかるFlow(正規化フロー)
+- `articles/vae-for-cats.md` — 猫でもわかるVAE
+- `articles/gan-for-cats.md` — 猫でもわかるGAN
+- `articles/acoustic-model-for-cats.md` — 猫でもわかる音響モデル
+- `articles/vits-for-cats.md` — 猫でもわかるVITS(総集編)
 
 ## ローカルプレビュー
 

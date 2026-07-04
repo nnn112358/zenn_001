@@ -3,7 +3,7 @@ title: "猫でもわかるG2P ― 文字を発音記号に変えるTTSの入口"
 emoji: "🐈"
 type: "tech"
 topics: ["g2p", "音声合成", "tts", "自然言語処理", "python"]
-published: false
+published: true
 ---
 
 ## この記事について
