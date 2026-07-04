@@ -8,6 +8,7 @@
 - `articles/gpu-for-tts-training.md` — TTS学習向けのGPUの選び方
 - `articles/tts-lineage-map-from-vits.md` — VITSから見るTTS 10系統マップ(2016–2026)
 - `articles/what-is-mel-spectrogram.md` — メルスペクトログラムってなんだ？(下書き)
+- `articles/hifigan-for-cats.md` — 猫でもわかるHiFi-GAN(下書き)
 
 ## ローカルプレビュー
 
