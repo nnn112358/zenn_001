@@ -11,6 +11,7 @@
 - `articles/hifigan-for-cats.md` — 猫でもわかるHiFi-GAN
 - `articles/g2p-for-cats.md` — 猫でもわかるG2P(下書き)
 - `articles/istftnet-for-cats.md` — 猫でもわかるiSTFTNet(下書き)
+- `articles/flow-for-cats.md` — 猫でもわかるFlow(正規化フロー)(下書き)
 
 ## ローカルプレビュー
 
