@@ -15,12 +15,13 @@ published: false
 **VITSは、これらが1つのモデルに合流する場所**です。VAE(V)を骨格に、Flow(F)で事前分布を柔軟にし、GAN(G)でデコーダを鍛える。さらに MAS でアライメントを自動化し、SDP で「喋り方の多様性」を表現する。総集編にふさわしい"全部入り"を、猫でもわかるように解きほぐします。😸
 
 ```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
 flowchart TD
-    V["【V】VAE 骨格<br/>(潜在zで橋渡し)<br/>→ 記事: VAE"]:::blue --> VITS["VITS<br/>単段E2E TTS"]:::amber
-    F["【F】Flow で事前分布を柔軟化<br/>→ 記事: Flow"]:::purple --> VITS
-    G["【G】GAN でデコーダを生々しく<br/>→ 記事: HiFi-GAN / GAN"]:::pink --> VITS
-    MAS["MAS でアライメント<br/>(音素↔潜在)<br/>→ 記事: 音響モデル"]:::blue --> VITS
-    SDP["SDP で一対多<br/>(多様なリズム)"]:::purple --> VITS
+    V("【V】VAE 骨格<br/>(潜在zで橋渡し)<br/>→ 記事: VAE"):::blue --> VITS("VITS<br/>単段E2E TTS"):::amber
+    F("【F】Flow で事前分布を柔軟化<br/>→ 記事: Flow"):::purple --> VITS
+    G("【G】GAN でデコーダを生々しく<br/>→ 記事: HiFi-GAN / GAN"):::pink --> VITS
+    MAS("MAS でアライメント<br/>(音素↔潜在)<br/>→ 記事: 音響モデル"):::blue --> VITS
+    SDP("SDP で一対多<br/>(多様なリズム)"):::purple --> VITS
     classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
     classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
     classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
@@ -30,7 +31,7 @@ flowchart TD
 ```
 
 :::message
-VITS = **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(Kim et al., Kakao Enterprise, ICML 2021, [arXiv:2106.06103](https://arxiv.org/abs/2106.06103))。本記事の枠組み・数値・損失式はすべて論文本文で確認しています。図は numpy + matplotlib で自作しました。
+VITS = **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(Kim et al., Kakao Enterprise, ICML 2021, [arXiv:2106.06103](https://arxiv.org/abs/2106.06103))。本記事の枠組み・数値・損失式はすべて論文本文で確認しています。
 :::
 
 ## 3行で言うと
@@ -54,16 +55,17 @@ VITSの正体を、論文はこう明言します。
 つまり中心にあるのは[VAE](https://zenn.dev/nnn112358/articles/vae-for-cats)。登場人物は3つです。
 
 ```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
 flowchart LR
-    LIN["線形スペクトログラム<br/>(学習時のみ)"]:::gray --> POST["Posterior Encoder<br/>q(z∣x) 【V】"]:::blue
-    POST --> Z["潜在変数 z"]:::amber
-    Z --> DEC["Decoder = HiFi-GAN<br/>p(x∣z) 【G】"]:::pink
-    DEC --> WAV["波形"]:::green
-    TXT["音素列 c<br/>(G2P出力)"]:::gray --> TENC["Text Encoder"]:::blue
-    TENC --> FLOW["Normalizing Flow<br/>条件付き事前分布 p(z∣c) 【F】"]:::purple
-    TENC --> SDP["確率的継続長予測器 SDP<br/>リズムの一対多"]:::purple
+    LIN("線形スペクトログラム<br/>(学習時のみ)"):::gray --> POST("Posterior Encoder<br/>q(z∣x) 【V】"):::blue
+    POST --> Z("潜在変数 z"):::amber
+    Z --> DEC("Decoder = HiFi-GAN<br/>p(x∣z) 【G】"):::pink
+    DEC --> WAV("波形"):::green
+    TXT("音素列 c<br/>(G2P出力)"):::gray --> TENC("Text Encoder"):::blue
+    TENC --> FLOW("Normalizing Flow<br/>条件付き事前分布 p(z∣c) 【F】"):::purple
+    TENC --> SDP("確率的継続長予測器 SDP<br/>リズムの一対多"):::purple
     FLOW -.->|"KL損失 + MAS で対応づけ"| Z
-    WAV -.->|"敵対的損失"| DISC["MPD + MSD<br/>識別器 【G】"]:::pink
+    WAV -.->|"敵対的損失"| DISC("MPD + MSD<br/>識別器 【G】"):::pink
     classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
     classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
     classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
