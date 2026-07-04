@@ -75,7 +75,30 @@ $$
 
 **ランダム性を $\varepsilon$ という"外部から来るノイズ"に追い出し**、$\mu$ と $\sigma$ は決定的な計算にする。こうすれば $\mu, \sigma$ に勾配が流れ、学習できます。地味ですが、VAEを訓練可能にした決定的なアイデアです。
 
-![VAEのアーキテクチャと再パラメータ化](/images/dg-vae-1.png)
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
+flowchart LR
+    X("入力 x"):::gray
+    ENC("エンコーダ q(z∣x)"):::blue
+    MS("μ, σ"):::blue
+    RP("z = μ + σ·ε<br/>ε ~ N(0, I)<br/>(再パラメータ化)"):::purple
+    DEC("デコーダ p(x∣z)"):::blue
+    XH("再構成 x̂"):::green
+    PR("事前分布 N(0, I)"):::gray
+    X --> ENC
+    ENC --> MS
+    MS --> RP
+    RP --> DEC
+    DEC --> XH
+    MS -.->|"KL を最小化"| PR
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
 
 ## 他の生成モデルとの違い
 

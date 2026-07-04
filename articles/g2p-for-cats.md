@@ -52,7 +52,30 @@ published: false
 
 G2Pは、音響モデルよりさらに前、フロントエンド(テキスト処理)の中核です。
 
-![G2Pを含むTTSフロントエンドの流れ](/images/dg-g2p-1.png)
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
+flowchart LR
+    T("生テキスト<br/>「今日は3本」"):::gray
+    N("テキスト正規化<br/>数字・記号を読み下し"):::blue
+    G("G2P<br/>文字 → 音素"):::amber
+    P("音素列 + アクセント<br/>ky o o w a ..."):::blue
+    AM("音響モデル"):::blue
+    VO("ボコーダ<br/>(HiFi-GAN等)"):::blue
+    W("音声"):::green
+    T --> N
+    N --> G
+    G --> P
+    P --> AM
+    AM --> VO
+    VO --> W
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
 
 - **テキスト正規化(normalization)**: `3` → 「さん」、`$5` → 「five dollars」、記号・日付・数字を「読める形」に開く前処理。G2Pとセットで語られます。
 - **G2P**: 開かれたテキストを音素列へ。
@@ -79,7 +102,24 @@ THROUGH  TH R UW
 
 書記素の列を音素の列へ「**翻訳**」する方法。機械翻訳と同じ encoder-decoder を使います。
 
-![seq2seqによるG2P](/images/dg-g2p-2.png)
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
+flowchart LR
+    IN("書記素列<br/>t h r o u g h"):::gray
+    ENC("Encoder"):::blue
+    DEC("Decoder"):::blue
+    OUT("音素列<br/>θ r uː"):::green
+    IN --> ENC
+    ENC --> DEC
+    DEC --> OUT
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
 
 **未知語(OOV)にも「それらしい発音」を推測できる**のが強み。実用ツールの多くは**ハイブリッド**で、たとえば英語の [`g2p_en`](https://github.com/Kyubyong/g2p) は「**辞書(CMUdict)で引ける単語は辞書 → 同綴異音は品詞で判定 → 未知語はニューラルseq2seq**」という三段構えです。
 

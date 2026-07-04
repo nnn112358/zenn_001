@@ -38,7 +38,21 @@ GAN・VAE・拡散モデル・フローは、**この「変換のやり方」が
 
 フローは**双方向**に使います。
 
-![正規化フローの2つの向き（生成と尤度）](/images/dg-flow-1.png)
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
+flowchart LR
+    Z("ノイズ z<br/>N(0, I)"):::gray
+    X("データ x<br/>(音声・メル等)"):::green
+    Z -->|"生成: x = g(z) 逆変換"| X
+    X -->|"学習・尤度: z = f(x) 順変換"| Z
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
 
 - **生成**: ガウスノイズ $z$ をサンプリング → $x = g(z)$ でデータを作る。
 - **学習・尤度計算**: データ $x$ を $z = f(x)$ で逆にたどり、**その確率(尤度)を厳密に計算**して最大化する。
@@ -68,7 +82,26 @@ Glow-TTSもまさにこの式で「テキスト条件つきの厳密な対数尤
 
 これを一撃で解決するのが **カップリング層(affine coupling layer)** です。入力を半分に割ってこうします。
 
-![アフィンカップリング層](/images/dg-flow-2.png)
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
+flowchart LR
+    XA("x_a (前半)"):::blue
+    ZA("z_a = x_a そのまま"):::green
+    NN("ニューラルネット<br/>s(x_a), t(x_a) を計算"):::purple
+    XB("x_b (後半)"):::blue
+    AF("z_b = x_b · exp(s) + t"):::green
+    XA --> ZA
+    XA --> NN
+    XB --> AF
+    NN --> AF
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
 
 - 前半 $x_a$ は**そのまま素通し**($z_a = x_a$)。
 - 後半 $x_b$ を、前半から作った $s, t$ で**アフィン変換**: $z_b = x_b \odot \exp(s(x_a)) + t(x_a)$。

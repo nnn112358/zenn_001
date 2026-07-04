@@ -74,11 +74,45 @@ $$
 
 **従来のHiFi-GAN**:波形の長さまで畳み込みで一気に拡大。
 
-![従来のHiFi-GAN（全部畳み込み）](/images/dg-istftnet-1.png)
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
+flowchart LR
+    M1("mel<br/>80 × T"):::blue
+    U1("転置畳み込みで<br/>波形長まで ×256"):::blue
+    W1("波形 1ch"):::green
+    M1 --> U1
+    U1 --> W1
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
 
 **iSTFTNet(C8C8I)**:途中まで拡大してから iSTFT にバトンタッチ。
 
-![iSTFTNet（C8C8I）のデータフロー](/images/dg-istftnet-2.png)
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
+flowchart LR
+    M2("mel<br/>80 × T"):::blue
+    U2("転置畳み込み ×64<br/>周波数次元を9まで削減"):::blue
+    MP("振幅9 + 位相9<br/>(exp / sin)"):::purple
+    I("iSTFT<br/>FFT=16, hop=4"):::amber
+    W2("波形 1ch"):::green
+    M2 --> U2
+    U2 --> MP
+    MP --> I
+    I --> W2
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
 
 ## どこまで iSTFT に置き換える? ― 「置き換えすぎ」は崩壊する
 
@@ -116,7 +150,24 @@ $$
 
 iSTFTNetは「**畳み込みを iSTFT に部分的に置き換える**」という潮流の起点になりました。
 
-![iSTFTを部分適用する系譜](/images/dg-istftnet-3.png)
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
+flowchart LR
+    HG("HiFi-GAN (2020)<br/>全部 畳み込み"):::gray
+    IS("iSTFTNet (2022)<br/>終盤を iSTFT に"):::amber
+    MBI("MB-iSTFT-VITS (2022)<br/>VITSに iSTFT + マルチバンド"):::blue
+    VO("Vocos (2023)<br/>全部 iSTFT + ConvNeXt"):::blue
+    HG --> IS
+    IS --> MBI
+    IS --> VO
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
 
 - **MB-iSTFT-VITS** … VITS本体に iSTFT とマルチバンドを持ち込んで軽量化。
 - **Vocos** … iSTFTNetが「置き換えすぎると崩壊する」と諦めた部分を、**ConvNeXt という良い骨格をフレームレートで回す**ことで克服し、**アップサンプリングを完全に廃止**(全部 iSTFT)。CPUで HiFi-GAN の約13倍速。
