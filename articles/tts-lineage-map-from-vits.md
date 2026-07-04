@@ -79,7 +79,7 @@ flowchart LR
     classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
 ```
 
-ポイントは **Glow-TTS(2020)** が導入した **MAS(Monotonic Alignment Search)**。これにより、Tacotron 系が必要としていた「注意機構によるアライメント学習」を外部から与える必要がなくなり、学習が安定しました。この MAS がそのまま VITS に受け継がれます。
+ポイントは **Glow-TTS(2020)** が導入した **MAS(Monotonic Alignment Search)**。これにより、Tacotron 系が必要としていた「Attention機構によるアライメント学習」を外部から与える必要がなくなり、学習が安定しました。この MAS がそのまま VITS に受け継がれます。
 
 同時期には AlignTTS / Flow-TTS / Flowtron といった「外部アライナー不要の並列 TTS」が競合として並走していました。
 
