@@ -3,7 +3,7 @@ title: "VITSから見るTTS 10系統マップ(2016–2026)"
 emoji: "🗺️"
 type: "tech"
 topics: ["tts", "音声合成", "vits", "機械学習", "vocoder"]
-published: false
+published: true
 ---
 
 ## この記事について
