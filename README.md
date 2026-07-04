@@ -5,6 +5,7 @@
 ## 記事
 
 - `articles/first-openjtalk.md` — はじめてのOpenJTalk
+- `articles/gpu-for-tts-training.md` — TTS学習向けのGPUの選び方
 
 ## ローカルプレビュー
 
