@@ -9,6 +9,7 @@
 - `articles/tts-lineage-map-from-vits.md` — VITSから見るTTS 10系統マップ(2016–2026)
 - `articles/what-is-mel-spectrogram.md` — メルスペクトログラムってなんだ？
 - `articles/hifigan-for-cats.md` — 猫でもわかるHiFi-GAN
+- `articles/g2p-for-cats.md` — 猫でもわかるG2P(下書き)
 
 ## ローカルプレビュー
 
