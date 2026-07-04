@@ -1,5 +1,5 @@
 ---
-title: "猫でもわかるVITS ― VAE + Flow + GAN が1つになる場所【シリーズ総集編】"
+title: "猫でもわかるVITS ― VAE + Flow + GAN が1つになる場所"
 emoji: "😸"
 type: "tech"
 topics: ["vits", "音声合成", "tts", "vae", "機械学習"]

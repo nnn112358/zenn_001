@@ -1,5 +1,5 @@
 ---
-title: "猫でもわかる音響モデル ― 音素をメルスペクトログラムに変えるTTSの中核"
+title: "猫でもわかる音響モデル ― 音素をメルスペクトログラムに変える"
 emoji: "😻"
 type: "tech"
 topics: ["tts", "音声合成", "fastspeech", "tacotron", "機械学習"]
