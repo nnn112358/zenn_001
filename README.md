@@ -13,6 +13,7 @@
 - `articles/istftnet-for-cats.md` — 猫でもわかるiSTFTNet(下書き)
 - `articles/flow-for-cats.md` — 猫でもわかるFlow(正規化フロー)(下書き)
 - `articles/vae-for-cats.md` — 猫でもわかるVAE(下書き)
+- `articles/gan-for-cats.md` — 猫でもわかるGAN(下書き)
 
 ## ローカルプレビュー
 
