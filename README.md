@@ -15,6 +15,7 @@
 - `articles/vae-for-cats.md` — 猫でもわかるVAE(下書き)
 - `articles/gan-for-cats.md` — 猫でもわかるGAN(下書き)
 - `articles/acoustic-model-for-cats.md` — 猫でもわかる音響モデル(下書き)
+- `articles/vits-for-cats.md` — 猫でもわかるVITS(総集編)(下書き)
 
 ## ローカルプレビュー
 
