@@ -21,6 +21,7 @@
 - `articles/wavenet-for-cats.md` — 猫でもわかるWaveNet(下書き)
 - `articles/glow-tts-for-cats.md` — 猫でもわかるGlow-TTS(下書き)
 - `articles/vocos-for-cats.md` — 猫でもわかるVocos(下書き)
+- `articles/mobilenet-for-cats.md` — 猫でもわかるMobileNet(下書き)
 
 ## ローカルプレビュー
 
