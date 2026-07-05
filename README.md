@@ -27,6 +27,7 @@
 - `articles/vits2-for-cats.md` — 猫でもわかるVITS2(下書き)
 - `articles/qwen-tts-for-cats.md` — 猫でもわかるQwen3-TTS(下書き)
 - `articles/llm-tts-for-cats.md` — 猫でもわかるLLM TTS(下書き)
+- `articles/zero-shot-for-cats.md` — 猫でもわかるzero-shot TTS(下書き)
 
 ## ローカルプレビュー
 
