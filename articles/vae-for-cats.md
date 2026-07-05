@@ -67,6 +67,25 @@ $$
 
 ①だけだと素のAE(穴だらけ)。②を足すことで潜在空間が整い、生成できるようになる——このバランスがVAEの本質です。
 
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':46,'rankSpacing':50,'curve':'linear'}}}%%
+flowchart LR
+    X("入力 x"):::gray --> E("エンコーダ"):::blue
+    E --> Z("潜在 z"):::amber
+    Z --> D("デコーダ"):::blue
+    D --> XH("復元"):::green
+    XH -.->|"① 再構成損失: 元に戻せたか"| X
+    E -.->|"② KL損失: N(0,I) に近いか"| P("事前分布 N(0, I)"):::gray
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
+*VAEの損失は2本柱。①復元の正確さ(再構成)と、②潜在空間の整い(KL)を同時に最適化する。*
+
 ## 再パラメータ化トリック
 
 ひとつ技術的な難所があります。「$z$ を $\mathcal{N}(\mu, \sigma^2)$ からサンプリングする」という操作は**ランダムなので微分できず、誤差逆伝播で $\mu, \sigma$ を学習できません**。

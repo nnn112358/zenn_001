@@ -33,9 +33,9 @@ published: false
 
 ## 3つの部品
 
-LLM TTS は、だいたい次の3つで出来ています。
+LLM TTS は、だいたい次の3つでできています。
 
-1. **ニューラルコーデック(トークナイザ)**:連続的な音声波形を、**離散トークン**に変換する部品([SoundStream / EnCodec / DAC / Mim](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) など。元をたどれば [VQ-VAE](https://zenn.dev/nnn112358/articles/vae-for-cats))。逆にトークンから波形も復元する。
+1. **ニューラルコーデック(トークナイザ)**:連続的な音声波形を、**離散トークン**に変換する部品([SoundStream / EnCodec / DAC / Mimi](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) など。元をたどれば [VQ-VAE](https://zenn.dev/nnn112358/articles/vae-for-cats))。逆にトークンから波形も復元する。
 2. **自己回帰LM(GPT風)**:デコーダ型 Transformer で、次のトークンを予測する本体。
 3. **条件づけ**:何を喋るかの**テキスト**(音素やBPE)と、誰の声かの**話者プロンプト**(数秒の参照音声)。
 

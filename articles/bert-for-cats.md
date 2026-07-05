@@ -49,6 +49,24 @@ BERT は、[Transformer](https://zenn.dev/nnn112358/articles/tts-lineage-map-fro
 
 こうして一度**汎用の言語理解**を身につけたら、あとは各タスク(分類・質問応答・そしてTTS)に、**少しの追加学習(ファインチューニング)**で転用できます。「大量テキストで基礎学力をつけ、あとは各科目に応用する」イメージ。この**事前学習→転用**という型が、BERT が NLP を塗り替えた理由です。
 
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':46,'rankSpacing':50,'curve':'linear'}}}%%
+flowchart LR
+    C("大量の生テキスト<br/>(Wikipedia等・ラベル不要)"):::gray --> PT("事前学習<br/>穴埋め(MLM)を大量に解く"):::amber
+    PT --> B("BERT<br/>汎用の文脈理解"):::blue
+    B --> T1("分類"):::green
+    B --> T2("質問応答"):::green
+    B --> T3("TTSの韻律予測"):::green
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
+*一度の事前学習で「基礎学力」を身につけ、各タスクには少しの追加学習で転用できる。*
+
 ## TTSでの使われ方
 
 TTS では、テキストや音素の列に **BERT の文脈表現を足す**ことで、韻律(どこを強く、どこで区切り、上げ下げするか)が自然になります。先の「two / too」のような、**文字だけでは分からない間の取り方**を、文脈から補えるわけです。

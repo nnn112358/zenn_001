@@ -69,6 +69,27 @@ flowchart LR
     classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
 ```
 
+学習の流れも図にしておきます。
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':46,'rankSpacing':50,'curve':'linear'}}}%%
+flowchart LR
+    MEL("正解メル"):::gray --> FL("Flow デコーダ<br/>(順方向)"):::purple
+    FL --> Z("潜在 z"):::amber
+    TE("Text Encoder<br/>音素ごとの分布 μ"):::blue --> MAS("MAS<br/>最尤の単調対応を探索"):::amber
+    Z --> MAS
+    MAS --> DUR("継続長の教師<br/>→ 継続長予測器を学習"):::green
+    MAS --> LL("厳密な尤度を最大化<br/>(モデル更新)"):::red
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
+*学習時: メルを Flow で z に変換し、MAS が最尤の対応を見つける。その対応から継続長の教師も得られる。*
+
 ## Tacotron 2 との比較
 
 | | Tacotron 2 | Glow-TTS |

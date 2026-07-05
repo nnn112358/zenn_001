@@ -136,6 +136,27 @@ $$
 
 「学習では両側から z を挟んで一致させ、推論ではテキスト側だけで z を作る」——VAEらしい使い方です。
 
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':46,'rankSpacing':50,'curve':'linear'}}}%%
+flowchart LR
+    A1("学習時: 音声あり"):::gray --> PE("Posterior Encoder"):::blue
+    PE --> Z1("潜在 z"):::amber
+    Z1 --> D1("Decoder"):::purple
+    D1 --> R("再構成 → 損失で学習"):::red
+    A2("推論時: テキストだけ"):::gray --> TE("Text Encoder + SDP"):::blue
+    TE --> PR("事前分布(Flow)から<br/>z をサンプル"):::amber
+    PR --> D2("Decoder"):::purple
+    D2 --> W("波形"):::green
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef pink fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+    classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
+```
+*上: 学習時は音声から z を作って再構成。下: 推論時は音声なし、テキスト側から z を作って生成。Posterior Encoder は学習専用。*
+
 ## なぜ効いた? そして系譜へ
 
 VITSの意義は、**2段の分離学習の限界を超えた**こと。中間表現(メル)を固定せず、E2Eで最適化することで、より自然で高品質な音声に到達しました。
@@ -158,7 +179,7 @@ VITSは、シリーズで学んだ部品の**総合芸術**です。
 - **VAE + Flow + GAN + MAS + SDP** が1つの損失式に合流する。
 - ここから VITS2 / Bert-VITS2 / MeloTTS / Fish-Speech など**現代TTSの大半が派生**した。
 
-これで「猫でもわかる」TTSシリーズは一区切り。**G2P → 音響モデル → メル → ボコーダ**の全工程、**VAE・Flow・GAN**の生成モデル、そしてそれらを束ねる **VITS** まで、ひととおり猫でもわかるようになりました。おつかれさまでした。🐾
+ここで「猫でもわかる」シリーズは大きな節目。**G2P → 音響モデル → メル → ボコーダ**の全工程、**VAE・Flow・GAN**の生成モデル、そしてそれらを束ねる **VITS** まで、ひととおり猫でもわかるようになりました。おつかれさまでした。🐾
 
 ## 参考リンク
 
