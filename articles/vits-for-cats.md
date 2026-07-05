@@ -165,3 +165,7 @@ VITSは、シリーズで学んだ部品の**総合芸術**です。
 - [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103) / 実装 [jaywalnut310/vits](https://github.com/jaywalnut310/vits)
 - シリーズ: [VAE](https://zenn.dev/nnn112358/articles/vae-for-cats) / [Flow](https://zenn.dev/nnn112358/articles/flow-for-cats) / [GAN](https://zenn.dev/nnn112358/articles/gan-for-cats) / [HiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) / [メルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [G2P](https://zenn.dev/nnn112358/articles/g2p-for-cats)
 - [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Glow-TTS](https://zenn.dev/nnn112358/articles/glow-tts-for-cats) ／ 次: [VITS2](https://zenn.dev/nnn112358/articles/vits2-for-cats)
+:::

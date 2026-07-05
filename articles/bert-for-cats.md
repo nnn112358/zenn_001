@@ -85,3 +85,7 @@ flowchart LR
 - [BERT (arXiv:1810.04805)](https://arxiv.org/abs/1810.04805)
 - [PnG-BERT (arXiv:2103.15060)](https://arxiv.org/abs/2103.15060) ― 音素+書記素のTTS用BERT
 - 関連記事: [猫でもわかるStyleTTS 2](https://zenn.dev/nnn112358/articles/styletts-for-cats) / [猫でもわかるVITS](https://zenn.dev/nnn112358/articles/vits-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [StyleTTS 2](https://zenn.dev/nnn112358/articles/styletts-for-cats) ／ 次: [LLM TTS](https://zenn.dev/nnn112358/articles/llm-tts-for-cats)
+:::

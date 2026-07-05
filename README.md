@@ -28,6 +28,7 @@
 - `articles/qwen-tts-for-cats.md` — 猫でもわかるQwen3-TTS(下書き)
 - `articles/llm-tts-for-cats.md` — 猫でもわかるLLM TTS(下書き)
 - `articles/zero-shot-for-cats.md` — 猫でもわかるzero-shot TTS(下書き)
+- `articles/tts-for-cats-index.md` — 猫でもわかるTTS 目次(下書き)
 
 ## ローカルプレビュー
 

@@ -169,3 +169,7 @@ flowchart LR
 - [DCGAN (arXiv:1511.06434)](https://arxiv.org/abs/1511.06434) / [LSGAN (arXiv:1611.04076)](https://arxiv.org/abs/1611.04076) / [WGAN (arXiv:1701.07875)](https://arxiv.org/abs/1701.07875)
 - [HiFi-GAN (arXiv:2010.05646)](https://arxiv.org/abs/2010.05646) / [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103)
 - 関連記事: [猫でもわかるVAE](https://zenn.dev/nnn112358/articles/vae-for-cats) / [猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Flow](https://zenn.dev/nnn112358/articles/flow-for-cats) ／ 次: [MAS](https://zenn.dev/nnn112358/articles/mas-for-cats)
+:::

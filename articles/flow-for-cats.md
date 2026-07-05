@@ -170,4 +170,8 @@ flowchart LR
 - [Glow: Generative Flow with Invertible 1×1 Convolutions (arXiv:1807.03039)](https://arxiv.org/abs/1807.03039)
 - [RealNVP: Density estimation using Real NVP (arXiv:1605.08803)](https://arxiv.org/abs/1605.08803)
 - [Glow-TTS (arXiv:2005.11129)](https://arxiv.org/abs/2005.11129) / [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103) / [WaveGlow (arXiv:1811.00002)](https://arxiv.org/abs/1811.00002)
-- 関連記事: [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) / [メルスペクトログラムってなんだ？](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats)
+- 関連記事: [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [VAE](https://zenn.dev/nnn112358/articles/vae-for-cats) ／ 次: [GAN](https://zenn.dev/nnn112358/articles/gan-for-cats)
+:::

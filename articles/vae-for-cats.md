@@ -162,4 +162,8 @@ VAEには離散版のいとこ **VQ-VAE**(潜在を"コードブック"の離散
 - [Auto-Encoding Variational Bayes(VAE原論文, arXiv:1312.6114)](https://arxiv.org/abs/1312.6114)
 - [VQ-VAE: Neural Discrete Representation Learning (arXiv:1711.00937)](https://arxiv.org/abs/1711.00937)
 - [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103)
-- 関連記事: [猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [メルスペクトログラムってなんだ？](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連記事: [猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Vocos](https://zenn.dev/nnn112358/articles/vocos-for-cats) ／ 次: [Flow](https://zenn.dev/nnn112358/articles/flow-for-cats)
+:::

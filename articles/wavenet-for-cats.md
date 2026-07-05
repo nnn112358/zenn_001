@@ -106,4 +106,8 @@ flowchart LR
 ## 参考リンク
 
 - [WaveNet (arXiv:1609.03499)](https://arxiv.org/abs/1609.03499)
-- 関連記事: [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [メルスペクトログラムってなんだ？](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連記事: [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [メルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) ／ 次: [HiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats)
+:::

@@ -101,3 +101,7 @@ MobileNet 自体は画像向けですが、**depthwise separable 畳み込みと
 
 - [MobileNets (arXiv:1704.04861)](https://arxiv.org/abs/1704.04861) ― V1(本記事)。続編に MobileNetV2(倒立残差), V3(NAS+SE)
 - 関連記事: [猫でもわかるVocos](https://zenn.dev/nnn112358/articles/vocos-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [zero-shot TTS](https://zenn.dev/nnn112358/articles/zero-shot-for-cats)
+:::

@@ -253,3 +253,7 @@ flowchart LR
 - [librosa `melspectrogram` ドキュメント](https://librosa.org/doc/latest/generated/librosa.feature.melspectrogram.html)
 - [torchaudio `MelSpectrogram` ドキュメント](https://pytorch.org/audio/stable/generated/torchaudio.transforms.MelSpectrogram.html)
 - 関連記事: [VITSから見るTTS 10系統マップ(2016–2026)](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) ／ 次: [WaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats)
+:::

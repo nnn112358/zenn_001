@@ -188,4 +188,8 @@ flowchart LR
 
 - 論文: [iSTFTNet (arXiv:2203.02395)](https://arxiv.org/abs/2203.02395)
 - 実装(コミュニティ版): [rishikksh20/iSTFTNet-pytorch](https://github.com/rishikksh20/iSTFTNet-pytorch)
-- 関連記事: [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [メルスペクトログラムってなんだ？](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連記事: [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [HiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) ／ 次: [Vocos](https://zenn.dev/nnn112358/articles/vocos-for-cats)
+:::

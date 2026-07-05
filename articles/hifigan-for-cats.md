@@ -241,4 +241,8 @@ HiFi-GAN は、その後のボコーダの標準になりました。
 
 - 論文: [HiFi-GAN (arXiv:2010.05646)](https://arxiv.org/abs/2010.05646)
 - 公式実装: [jik876/hifi-gan](https://github.com/jik876/hifi-gan)
-- 関連記事: [メルスペクトログラムってなんだ？](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連記事: [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [WaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats) ／ 次: [iSTFTNet](https://zenn.dev/nnn112358/articles/istftnet-for-cats)
+:::

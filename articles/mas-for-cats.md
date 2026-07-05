@@ -104,3 +104,7 @@ Glow-TTS では MAS は「厳密な対数尤度」を最大化するアライメ
 - [Glow-TTS (arXiv:2005.11129)](https://arxiv.org/abs/2005.11129) ― MAS の提案
 - [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103) / 実装 [jaywalnut310/vits](https://github.com/jaywalnut310/vits)
 - 関連記事: [猫でもわかるVITS](https://zenn.dev/nnn112358/articles/vits-for-cats) / [猫でもわかるSDP](https://zenn.dev/nnn112358/articles/sdp-for-cats) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) / [猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [GAN](https://zenn.dev/nnn112358/articles/gan-for-cats) ／ 次: [SDP](https://zenn.dev/nnn112358/articles/sdp-for-cats)
+:::

@@ -105,3 +105,7 @@ Glow-TTS の Flow + MAS は、そのまま [VITS](https://zenn.dev/nnn112358/art
 
 - [Glow-TTS (arXiv:2005.11129)](https://arxiv.org/abs/2005.11129) / 実装 [jaywalnut310/glow-tts](https://github.com/jaywalnut310/glow-tts)
 - 関連記事: [猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats) / [猫でもわかるMAS](https://zenn.dev/nnn112358/articles/mas-for-cats) / [猫でもわかるVITS](https://zenn.dev/nnn112358/articles/vits-for-cats) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [SDP](https://zenn.dev/nnn112358/articles/sdp-for-cats) ／ 次: [VITS](https://zenn.dev/nnn112358/articles/vits-for-cats)
+:::

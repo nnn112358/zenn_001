@@ -243,4 +243,8 @@ print(pyopenjtalk.g2p("水を3本ください"))   # 数詞・助数詞も読み
 - [g2p_en(英語G2P・同綴異音対応)](https://github.com/Kyubyong/g2p)
 - [phonemizer(多言語・IPA)](https://github.com/bootphon/phonemizer) / バックエンドの [espeak-ng](https://github.com/espeak-ng/espeak-ng)
 - [pyopenjtalk(日本語G2P)](https://github.com/r9y9/pyopenjtalk)
-- 関連記事: [はじめてのOpenJTalk](https://zenn.dev/nnn112358/articles/first-openjtalk) / [メルスペクトログラムってなんだ？](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連記事: [はじめてのOpenJTalk](https://zenn.dev/nnn112358/articles/first-openjtalk) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 次: [音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats)
+:::

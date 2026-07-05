@@ -98,3 +98,7 @@ flowchart LR
 
 - [StyleTTS 2 (arXiv:2306.07691)](https://arxiv.org/abs/2306.07691) / 実装 [yl4579/StyleTTS2](https://github.com/yl4579/StyleTTS2) / 前身 [StyleTTS (arXiv:2205.15439)](https://arxiv.org/abs/2205.15439)
 - 関連記事: [猫でもわかるGAN](https://zenn.dev/nnn112358/articles/gan-for-cats) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [猫でもわかるiSTFTNet](https://zenn.dev/nnn112358/articles/istftnet-for-cats) / [猫でもわかるVITS](https://zenn.dev/nnn112358/articles/vits-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+
+:::message
+🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [VITS2](https://zenn.dev/nnn112358/articles/vits2-for-cats) ／ 次: [BERT](https://zenn.dev/nnn112358/articles/bert-for-cats)
+:::
