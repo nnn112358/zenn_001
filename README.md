@@ -19,6 +19,7 @@
 - `articles/sdp-for-cats.md` — 猫でもわかるSDP(下書き)
 - `articles/mas-for-cats.md` — 猫でもわかるMAS(下書き)
 - `articles/wavenet-for-cats.md` — 猫でもわかるWaveNet(下書き)
+- `articles/glow-tts-for-cats.md` — 猫でもわかるGlow-TTS(下書き)
 
 ## ローカルプレビュー
 
