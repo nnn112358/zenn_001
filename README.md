@@ -24,6 +24,7 @@
 - `articles/mobilenet-for-cats.md` — 猫でもわかるMobileNet(下書き)
 - `articles/styletts-for-cats.md` — 猫でもわかるStyleTTS 2(下書き)
 - `articles/bert-for-cats.md` — 猫でもわかるBERT(下書き)
+- `articles/vits2-for-cats.md` — 猫でもわかるVITS2(下書き)
 
 ## ローカルプレビュー
 
