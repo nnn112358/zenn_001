@@ -3,7 +3,7 @@ title: "猫でもわかるSDP ― VITSが「毎回ちがう自然なリズム」
 emoji: "🎲"
 type: "tech"
 topics: ["vits", "音声合成", "tts", "normalizingflow", "機械学習"]
-published: true
+published: false
 ---
 
 ## この記事について

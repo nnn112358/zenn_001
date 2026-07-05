@@ -3,7 +3,7 @@ title: "猫でもわかるLLM TTS ― 音声を「言語モデル」で喋らせ
 emoji: "🤖"
 type: "tech"
 topics: ["tts", "音声合成", "llm", "機械学習", "深層学習"]
-published: true
+published: false
 ---
 
 ## この記事について

@@ -3,7 +3,7 @@ title: "はじめてのOpenJTalk"
 emoji: "🗣️"
 type: "tech"
 topics: ["openjtalk", "tts", "音声合成", "python"]
-published: true
+published: false
 ---
 
 ## OpenJTalk とは

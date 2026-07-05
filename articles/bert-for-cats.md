@@ -3,7 +3,7 @@ title: "猫でもわかるBERT ― 文脈を読む土台、そしてTTSの自然
 emoji: "📚"
 type: "tech"
 topics: ["bert", "自然言語処理", "tts", "音声合成", "機械学習"]
-published: true
+published: false
 ---
 
 ## この記事について

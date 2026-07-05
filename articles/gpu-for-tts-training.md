@@ -3,7 +3,7 @@ title: "TTS学習向けのGPUの選び方"
 emoji: "🖥️"
 type: "tech"
 topics: ["tts", "gpu", "機械学習", "音声合成"]
-published: true
+published: false
 ---
 
 ## 結論(先に)

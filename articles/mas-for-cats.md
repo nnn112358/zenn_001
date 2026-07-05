@@ -3,7 +3,7 @@ title: "猫でもわかるMAS ― VITSが外部ツールなしで音素と音を
 emoji: "🪜"
 type: "tech"
 topics: ["vits", "音声合成", "tts", "機械学習", "アルゴリズム"]
-published: true
+published: false
 ---
 
 ## この記事について
