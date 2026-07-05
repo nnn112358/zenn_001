@@ -25,6 +25,7 @@
 - `articles/styletts-for-cats.md` — 猫でもわかるStyleTTS 2(下書き)
 - `articles/bert-for-cats.md` — 猫でもわかるBERT(下書き)
 - `articles/vits2-for-cats.md` — 猫でもわかるVITS2(下書き)
+- `articles/qwen-tts-for-cats.md` — 猫でもわかるQwen3-TTS(下書き)
 
 ## ローカルプレビュー
 
