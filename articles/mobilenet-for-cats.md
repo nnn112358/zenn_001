@@ -3,7 +3,7 @@ title: "猫でもわかるMobileNet ― 軽量モデルの主役「depthwise sep
 emoji: "📱"
 type: "tech"
 topics: ["深層学習", "cnn", "機械学習", "音声合成", "画像認識"]
-published: false
+published: true
 ---
 
 ## この記事について

@@ -3,7 +3,7 @@ title: "猫でもわかるVocos ― フーリエで一発、HiFi-GAN級を桁違
 emoji: "🌀"
 type: "tech"
 topics: ["tts", "音声合成", "vocoder", "機械学習", "deeplearning"]
-published: false
+published: true
 ---
 
 ## この記事について

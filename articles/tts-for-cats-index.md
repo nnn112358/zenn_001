@@ -3,7 +3,7 @@ title: "猫でもわかるTTS 目次 ― 全21本の読む順ガイド"
 emoji: "🐾"
 type: "tech"
 topics: ["tts", "音声合成", "機械学習", "深層学習", "vits"]
-published: false
+published: true
 ---
 
 ## このシリーズについて

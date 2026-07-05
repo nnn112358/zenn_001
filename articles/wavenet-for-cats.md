@@ -3,7 +3,7 @@ title: "猫でもわかるWaveNet ― ニューラルボコーダの元祖を図
 emoji: "🌊"
 type: "tech"
 topics: ["wavenet", "音声合成", "tts", "vocoder", "機械学習"]
-published: false
+published: true
 ---
 
 ## この記事について

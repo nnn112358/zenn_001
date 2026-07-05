@@ -16,19 +16,19 @@
 - `articles/gan-for-cats.md` — 猫でもわかるGAN
 - `articles/acoustic-model-for-cats.md` — 猫でもわかる音響モデル
 - `articles/vits-for-cats.md` — 猫でもわかるVITS(総集編)
-- `articles/sdp-for-cats.md` — 猫でもわかるSDP(下書き)
-- `articles/mas-for-cats.md` — 猫でもわかるMAS(下書き)
-- `articles/wavenet-for-cats.md` — 猫でもわかるWaveNet(下書き)
-- `articles/glow-tts-for-cats.md` — 猫でもわかるGlow-TTS(下書き)
-- `articles/vocos-for-cats.md` — 猫でもわかるVocos(下書き)
-- `articles/mobilenet-for-cats.md` — 猫でもわかるMobileNet(下書き)
-- `articles/styletts-for-cats.md` — 猫でもわかるStyleTTS 2(下書き)
-- `articles/bert-for-cats.md` — 猫でもわかるBERT(下書き)
-- `articles/vits2-for-cats.md` — 猫でもわかるVITS2(下書き)
-- `articles/qwen-tts-for-cats.md` — 猫でもわかるQwen3-TTS(下書き)
-- `articles/llm-tts-for-cats.md` — 猫でもわかるLLM TTS(下書き)
-- `articles/zero-shot-for-cats.md` — 猫でもわかるzero-shot TTS(下書き)
-- `articles/tts-for-cats-index.md` — 猫でもわかるTTS 目次(下書き)
+- `articles/sdp-for-cats.md` — 猫でもわかるSDP
+- `articles/mas-for-cats.md` — 猫でもわかるMAS
+- `articles/wavenet-for-cats.md` — 猫でもわかるWaveNet
+- `articles/glow-tts-for-cats.md` — 猫でもわかるGlow-TTS
+- `articles/vocos-for-cats.md` — 猫でもわかるVocos
+- `articles/mobilenet-for-cats.md` — 猫でもわかるMobileNet
+- `articles/styletts-for-cats.md` — 猫でもわかるStyleTTS 2
+- `articles/bert-for-cats.md` — 猫でもわかるBERT
+- `articles/vits2-for-cats.md` — 猫でもわかるVITS2
+- `articles/qwen-tts-for-cats.md` — 猫でもわかるQwen3-TTS
+- `articles/llm-tts-for-cats.md` — 猫でもわかるLLM TTS
+- `articles/zero-shot-for-cats.md` — 猫でもわかるzero-shot TTS
+- `articles/tts-for-cats-index.md` — 猫でもわかるTTS 目次
 
 ## ローカルプレビュー
 

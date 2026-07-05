@@ -3,7 +3,7 @@ title: "猫でもわかるVITS2 ― VITSの弱点を3つの改良でみがく"
 emoji: "🆙"
 type: "tech"
 topics: ["vits", "音声合成", "tts", "gan", "機械学習"]
-published: false
+published: true
 ---
 
 ## この記事について
