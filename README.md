@@ -18,6 +18,7 @@
 - `articles/vits-for-cats.md` — 猫でもわかるVITS(総集編)
 - `articles/sdp-for-cats.md` — 猫でもわかるSDP(下書き)
 - `articles/mas-for-cats.md` — 猫でもわかるMAS(下書き)
+- `articles/wavenet-for-cats.md` — 猫でもわかるWaveNet(下書き)
 
 ## ローカルプレビュー
 
