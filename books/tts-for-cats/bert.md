@@ -4,9 +4,9 @@ title: "BERT ― 文脈を読む土台、そしてTTSの自然な抑揚へ"
 
 ## この章について
 
-前回の [StyleTTS 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/styletts2) で「PL-BERT(音素レベルBERT)」がさらっと出てきました。この記事はその **BERT** の話です。
+前回の [StyleTTS 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/styletts2) で「PL-BERT(音素レベルBERT)」がさらっと出てきました。この章はその **BERT** の話です。
 
-BERT(2018, Google)は、**文章の"文脈"を読む**ための、自然言語処理(NLP)の土台となったモデル。TTS(音声合成)では、テキストの**意味や構造を捉えて、より自然な抑揚(韻律)を作る**ために使われます。[Bert-VITS2](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) や StyleTTS 2、PnG-BERT など、TTSのあちこちに顔を出す縁の下の力持ち。猫でもわかるように見ていきましょう。📚
+BERT(2018, Google)は、**文章の"文脈"を読む**ための、自然言語処理(NLP)の土台となったモデル。TTS(音声合成)では、テキストの**意味や構造を捉えて、より自然な抑揚(韻律)を作る**ために使われます。[Bert-VITS2](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) や StyleTTS 2、PnG-BERT など、TTSのあちこちに顔を出す縁の下の力持ち。見ていきましょう。📚
 
 :::message
 BERT: Devlin et al., *"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding"* (2018, [arXiv:1810.04805](https://arxiv.org/abs/1810.04805))。TTS への応用は PnG-BERT([arXiv:2103.15060](https://arxiv.org/abs/2103.15060))等の論文で確認しています。図は matplotlib、フローチャートは mermaid です。
@@ -85,7 +85,7 @@ flowchart LR
 - **PL-BERT(音素レベルBERT)**:[StyleTTS 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/styletts2) が韻律用のテキストエンコーダに採用。
 - **Bert-VITS2**:多言語BERTの表現を [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) に注入し、表現力・韻律を強化。
 
-## 猫のまとめ 📚
+## まとめ 📚
 
 - BERT = **Transformer エンコーダ**を大量テキストで事前学習し、単語を**文脈込みの表現**にするモデル。
 - 学習は **穴埋め(MLM)**:マスクした単語を**左右両方向の文脈**から当てる → ラベル不要で深い文脈理解。
@@ -98,4 +98,4 @@ flowchart LR
 
 - [BERT (arXiv:1810.04805)](https://arxiv.org/abs/1810.04805)
 - [PnG-BERT (arXiv:2103.15060)](https://arxiv.org/abs/2103.15060) ― 音素+書記素のTTS用BERT
-- 関連記事: [猫でもわかるStyleTTS 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/styletts2) / [猫でもわかるVITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [StyleTTS 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/styletts2) / [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

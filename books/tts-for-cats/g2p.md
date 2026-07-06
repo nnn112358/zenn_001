@@ -4,11 +4,11 @@ title: "G2P ― 文字を発音記号に変えるTTSの入口"
 
 ## この章について
 
-これまでの記事で、TTS(音声合成)の後半——[メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram)と、それを音にする[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)——を見てきました。
+ここまでの章で、TTS(音声合成)の後半——[メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram)と、それを音にする[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)——を見てきました。
 
 今回はその**一番手前**、テキストが最初に通る関門 **G2P(Grapheme-to-Phoneme)** の話です。日本語で言うと「**書記素から音素への変換**」、要するに **「文字」を「発音」に変える処理**。人間が「read」を見て文脈で読み分けるのと同じことを、機械にやらせます。
 
-地味ですが、ここを間違えると**どんなに高性能なモデルでも「読み間違い」で台無し**になる、TTSの縁の下の力持ちです。猫でもわかるように説明します。🐈
+地味ですが、ここを間違えると**どんなに高性能なモデルでも「読み間違い」で台無し**になる、TTSの縁の下の力持ちです。説明します。🐈
 
 ## 3行で言うと
 
@@ -157,7 +157,7 @@ flowchart LR
 | 三本 | さんぼん |
 | 六本 | ろっぽん |
 
-こうした処理をまとめて面倒みてくれるのが、[前々回の記事](https://zenn.dev/nnn112358/articles/first-openjtalk)で紹介した **Open JTalk / `pyopenjtalk`** です。
+こうした処理をまとめて面倒みてくれるのが、[前の章](https://zenn.dev/nnn112358/articles/first-openjtalk)で紹介した **Open JTalk / `pyopenjtalk`** です。
 
 ```python
 import pyopenjtalk
@@ -223,7 +223,7 @@ print(pyopenjtalk.g2p("水を3本ください"))   # 数詞・助数詞も読み
 
 日本語のように読みが複雑な言語では、まだ **G2P(pyopenjtalk等)を前段に置くのが主流**です。
 
-## 猫のまとめ 🐈
+## まとめ 🐈
 
 - G2P = **文字(書記素)→ 発音(音素)** への変換。TTSの入口。
 - 綴りは発音を裏切る(`ough`、同綴異音)ので、**辞書 + ルール + ニューラル**を組み合わせて解く。
@@ -239,4 +239,4 @@ print(pyopenjtalk.g2p("水を3本ください"))   # 数詞・助数詞も読み
 - [g2p_en(英語G2P・同綴異音対応)](https://github.com/Kyubyong/g2p)
 - [phonemizer(多言語・IPA)](https://github.com/bootphon/phonemizer) / バックエンドの [espeak-ng](https://github.com/espeak-ng/espeak-ng)
 - [pyopenjtalk(日本語G2P)](https://github.com/r9y9/pyopenjtalk)
-- 関連記事: [はじめてのOpenJTalk](https://zenn.dev/nnn112358/articles/first-openjtalk) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [はじめてのOpenJTalk](https://zenn.dev/nnn112358/articles/first-openjtalk) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

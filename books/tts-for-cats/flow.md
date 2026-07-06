@@ -10,10 +10,10 @@ VITSは「**VAE + Flow + GAN**」の合わせ技だ、と[系譜の記事](https
 **用語の注意**:「VAE + Flow + GAN」はVITSを構成する3つの技術のこと。VITSの正式名称は **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(頭文字は V・I・T・S)で、VAE+Flow+GAN の頭文字を並べたものではありません。
 :::
 
-Glow-TTSの心臓部であり、WaveGlow(flowボコーダ)の本体であり、VITSの事前分布を支える——TTSのあちこちで効いている生成モデルの一族。名前は難しそうですが、**「可逆な変換でノイズを目的の形に整形する」**というシンプルな発想です。猫でもわかるように、図と最小限の数式で説明します。🐈‍⬛
+Glow-TTSの心臓部であり、WaveGlow(flowボコーダ)の本体であり、VITSの事前分布を支える——TTSのあちこちで効いている生成モデルの一族。名前は難しそうですが、**「可逆な変換でノイズを目的の形に整形する」**というシンプルな発想です。図と最小限の数式で説明します。🐈‍⬛
 
 :::message
-「Flow」には紛らわしい別物 **Flow Matching**(F5-TTS等)もあります。両者の違いは最後にはっきり整理します。この記事の主役は **正規化フロー(Normalizing Flow)** です。
+「Flow」には紛らわしい別物 **Flow Matching**(F5-TTS等)もあります。両者の違いは最後にはっきり整理します。この章の主役は **正規化フロー(Normalizing Flow)** です。
 :::
 
 ## 3行で言うと
@@ -143,15 +143,15 @@ flowchart LR
 
 名前が似ていて**超・混同されがち**な両者を、はっきり分けておきます。
 
-| | 正規化フロー(この記事) | Flow Matching |
+| | 正規化フロー(この章) | Flow Matching |
 |---|---|---|
 | 変換 | **離散的**な可逆層の積み重ね | **連続時間**のODE(常微分方程式) |
 | 学習 | 変数変換で厳密な尤度を最大化 | ベクトル場(速度場)を回帰(simulation-free) |
 | 代表 | Glow-TTS, VITS, WaveGlow | Voicebox, Matcha-TTS, **F5-TTS** |
 
-どちらも「ノイズをデータに変換する」点は同じですが、**中の仕組みはまったく別物**です。「flow」という単語だけで同一視しないよう注意(→系譜は[TTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)参照)。厳密には Flow Matching は「連続正規化フロー(CNF)」を効率よく学習する手法、という位置づけです。詳しくは[猫でもわかるFlow Matching](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow-matching)で解説しています。
+どちらも「ノイズをデータに変換する」点は同じですが、**中の仕組みはまったく別物**です。「flow」という単語だけで同一視しないよう注意(→系譜は[TTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)参照)。厳密には Flow Matching は「連続正規化フロー(CNF)」を効率よく学習する手法、という位置づけです。詳しくは[Flow Matching](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow-matching)で解説しています。
 
-## 猫のまとめ 🐈‍⬛
+## まとめ 🐈‍⬛
 
 - 正規化フロー = **可逆変換を積み重ねて、ガウスノイズを複雑なデータ分布に整形**する生成モデル。
 - 可逆だから**生成と厳密な尤度計算の両方**ができる。カギは**変数変換の公式**と**ヤコビアン補正**。
@@ -166,4 +166,4 @@ flowchart LR
 - [Glow: Generative Flow with Invertible 1×1 Convolutions (arXiv:1807.03039)](https://arxiv.org/abs/1807.03039)
 - [RealNVP: Density estimation using Real NVP (arXiv:1605.08803)](https://arxiv.org/abs/1605.08803)
 - [Glow-TTS (arXiv:2005.11129)](https://arxiv.org/abs/2005.11129) / [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103) / [WaveGlow (arXiv:1811.00002)](https://arxiv.org/abs/1811.00002)
-- 関連記事: [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)
+- 関連する章: [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)

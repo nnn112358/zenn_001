@@ -1,5 +1,5 @@
-title: "猫でもわかるTTS ― テキストが音になるまで"
-summary: "VITS / Tacotron / VALL-E から最前線まで、TTS(音声合成)のしくみを1章1テーマで図解する全31章。"
+title: "TTS ― テキストが音になるまで"
+summary: "Tacotron から VITS、VALL-E、MaskGCT まで——TTS(音声合成)のしくみを1章1テーマ、図と最小限の数式で解きほぐす全31章。"
 topics: ["tts", "音声合成", "機械学習", "深層学習", "vits"]
 published: true
 price: 0

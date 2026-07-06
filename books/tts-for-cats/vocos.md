@@ -4,12 +4,12 @@ title: "Vocos ― フーリエで一発、HiFi-GAN級を桁違いに速く"
 
 ## この章について
 
-[猫でもわかるiSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet)の最後で、「iSTFTNet が諦めた"全部 iSTFT 化"を、良い骨格で克服したのが **Vocos**」と紹介しました。この記事はその Vocos の話です。
+[iSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet)の最後で、「iSTFTNet が諦めた"全部 iSTFT 化"を、良い骨格で克服したのが **Vocos**」と紹介しました。この章はその Vocos の話です。
 
-Vocos(2023)は、**HiFi-GAN と同等の音質を、桁違いに速く**出すフーリエ系ボコーダ。カギは「**ネットワークを高い解像度で走らせない**」という発想の転換にあります。猫でもわかるように図で解いていきます。🌀
+Vocos(2023)は、**HiFi-GAN と同等の音質を、桁違いに速く**出すフーリエ系ボコーダ。カギは「**ネットワークを高い解像度で走らせない**」という発想の転換にあります。図で解いていきます。🌀
 
 :::message
-Vocos: Siuzdak, *"Vocos: Closing the gap between time-domain and Fourier-based neural vocoders"* (2023, [arXiv:2306.00814](https://arxiv.org/abs/2306.00814))。本記事の仕様・数値は論文本文で確認しています。解像度の図は matplotlib、フローチャートは mermaid です。
+Vocos: Siuzdak, *"Vocos: Closing the gap between time-domain and Fourier-based neural vocoders"* (2023, [arXiv:2306.00814](https://arxiv.org/abs/2306.00814))。本章の仕様・数値は論文本文で確認しています。解像度の図は matplotlib、フローチャートは mermaid です。
 :::
 
 ## 3行で言うと
@@ -76,7 +76,7 @@ flowchart LR
 
 論文の評価では、Vocos は **HiFi-GAN の約13倍、BigVGAN の約70倍**の速度(とくにGPUなしで顕著)。それでいて**音質はSOTAと同等**。「速さと品質はトレードオフ」を、フーリエ表現という良い"型"の力で崩したわけです([→実測でも Vocos は CPU 最速級でした](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan))。
 
-## 猫のまとめ 🌀
+## まとめ 🌀
 
 - Vocos = **複素スペクトル(振幅＋位相)を直接予測 → 逆STFTで波形化**するGANボコーダ。
 - **全層フレームレートのまま(isotropic)** 処理し、アップサンプルは **iSTFT一発**。だから軽くて速い。
@@ -89,4 +89,4 @@ flowchart LR
 ## 参考リンク
 
 - [Vocos (arXiv:2306.00814)](https://arxiv.org/abs/2306.00814) / 実装 [gemelo-ai/vocos](https://github.com/gemelo-ai/vocos)
-- 関連記事: [猫でもわかるiSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [iSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

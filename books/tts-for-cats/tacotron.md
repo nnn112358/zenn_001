@@ -4,12 +4,12 @@ title: "Tacotron ― 文字から音を直接作った、E2E TTSの原点"
 
 ## この章について
 
-このシリーズでは VITS や [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) といった現代のモデルを見てきましたが、今回は歴史をさかのぼって **Tacotron**(2017, Google)を見ます。**文字から音(スペクトログラム)を直接作った、エンドツーエンド(E2E)TTS の原点**です。
+この本では VITS や [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) といった現代のモデルを見てきましたが、今回は歴史をさかのぼって **Tacotron**(2017, Google)を見ます。**文字から音(スペクトログラム)を直接作った、エンドツーエンド(E2E)TTS の原点**です。
 
-いまでは当たり前の「文字を入れたら音が出る」——これを、人手の設計をほぼ捨てて、**seq2seq + Attention** ひとつで実現した記念碑的モデル。ここから [Tacotron 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/tacotron2) → 現代へと続く流れが始まりました。猫でもわかるように見ていきましょう。🌮
+いまでは当たり前の「文字を入れたら音が出る」——これを、人手の設計をほぼ捨てて、**seq2seq + Attention** ひとつで実現した記念碑的モデル。ここから [Tacotron 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/tacotron2) → 現代へと続く流れが始まりました。見ていきましょう。🌮
 
 :::message
-Tacotron: Wang et al., *"Tacotron: Towards End-to-End Speech Synthesis"* (2017, [arXiv:1703.10135](https://arxiv.org/abs/1703.10135))。24.6時間・単一話者データで学習、MOS 3.82（当時の商用パラメトリック 3.69 を上回る）。本記事の仕様・数値は論文本文で確認しています。図は matplotlib と mermaid で作成しました。
+Tacotron: Wang et al., *"Tacotron: Towards End-to-End Speech Synthesis"* (2017, [arXiv:1703.10135](https://arxiv.org/abs/1703.10135))。24.6時間・単一話者データで学習、MOS 3.82（当時の商用パラメトリック 3.69 を上回る）。本章の仕様・数値は論文本文で確認しています。図は matplotlib と mermaid で作成しました。
 :::
 
 ## 3行で言うと
@@ -104,7 +104,7 @@ Tacotron は、**ニューラルE2E TTS の起点**です。ここから、
 
 つまり Tacotron が示した「文字→音を丸ごと学ぶ」という発想が、その後のTTS([→系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits))すべての土台になっています。
 
-## 猫のまとめ 🌮
+## まとめ 🌮
 
 - Tacotron = **文字 →(seq2seq + Attention)→ スペクトログラム**をゼロから一括学習した、最初期のE2E TTS。
 - **CBHG**(Conv Bank + Highway + BiGRU)で特徴抽出、**Reduction Factor**(r=2)でデコーダを高速化。
@@ -117,4 +117,4 @@ Tacotron は、**ニューラルE2E TTS の起点**です。ここから、
 ## 参考リンク
 
 - [Tacotron (arXiv:1703.10135)](https://arxiv.org/abs/1703.10135) / [Tacotron 2 (arXiv:1712.05884)](https://arxiv.org/abs/1712.05884)
-- 関連記事: [猫でもわかるTacotron 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/tacotron2) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) / [猫でもわかるWaveNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/wavenet) / [猫でもわかるMAS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [Tacotron 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/tacotron2) / [音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) / [WaveNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/wavenet) / [MAS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

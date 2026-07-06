@@ -4,12 +4,12 @@ title: "MAS ― VITSが外部ツールなしで音素と音を対応づけるし
 
 ## この章について
 
-[猫でもわかるVITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits)で、VITS の部品として **MAS(Monotonic Alignment Search / 単調アライメント探索)** を紹介しました。この記事はその深掘りです。
+[VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits)で、VITS の部品として **MAS(Monotonic Alignment Search / 単調アライメント探索)** を紹介しました。この章はその深掘りです。
 
-前回の [SDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp) が「推論のとき、継続長を**生成する**」係だったのに対し、MAS は「学習のとき、正解のアライメント（＝どのフレームがどの音素か）を**見つける**」係。ちょうど対になる部品です。しかも **外部ツールに一切頼らず、動的計画法で自力で**それをやってのけます。猫でもわかるように解いていきます。🪜
+前回の [SDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp) が「推論のとき、継続長を**生成する**」係だったのに対し、MAS は「学習のとき、正解のアライメント（＝どのフレームがどの音素か）を**見つける**」係。ちょうど対になる部品です。しかも **外部ツールに一切頼らず、動的計画法で自力で**それをやってのけます。解いていきます。🪜
 
 :::message
-MAS は Glow-TTS(Kim et al., 2020, [arXiv:2005.11129](https://arxiv.org/abs/2005.11129))で提案され、VITS([arXiv:2106.06103](https://arxiv.org/abs/2106.06103))に受け継がれました。本記事の仕様は両論文で確認しています。図のうちアライメントの図は matplotlib(実際にMASの動的計画法を実装して描画)、フローチャートは mermaid です。
+MAS は Glow-TTS(Kim et al., 2020, [arXiv:2005.11129](https://arxiv.org/abs/2005.11129))で提案され、VITS([arXiv:2106.06103](https://arxiv.org/abs/2106.06103))に受け継がれました。本章の仕様は両論文で確認しています。図のうちアライメントの図は matplotlib(実際にMASの動的計画法を実装して描画)、フローチャートは mermaid です。
 :::
 
 ## 3行で言うと
@@ -20,7 +20,7 @@ MAS は Glow-TTS(Kim et al., 2020, [arXiv:2005.11129](https://arxiv.org/abs/2005
 
 ## 何を解きたいのか:アライメント問題
 
-[音響モデルの記事](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model)で見たとおり、TTS の中心的な難所は **短い音素列と長い音声フレーム列の対応づけ(アライメント)** です。「こんにちは」の `k` は何フレーム分？ `o` は？——これが分からないと、そもそも学習ができません。
+[音響モデルの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model)で見たとおり、TTS の中心的な難所は **短い音素列と長い音声フレーム列の対応づけ(アライメント)** です。「こんにちは」の `k` は何フレーム分？ `o` は？——これが分からないと、そもそも学習ができません。
 
 厄介なのは、**正解のアライメントはデータに付いていない**こと。音声とテキストのペアはあっても、「どの瞬間がどの音素か」というラベルは普通ありません。ここをどう埋めるかで、TTS の流派が分かれます。
 
@@ -55,7 +55,7 @@ $$
 Q(i,j) = \text{value}(i,j) + \max\big(\,Q(i,\,j-1),\; Q(i-1,\,j-1)\,\big)
 $$
 
-表の左上から順に `Q` を埋めていき、最後に右下から**逆にたどれば**、最適な経路（＝アライメント）が復元できます。上の図の赤い経路は、まさにこの計算で得たものです（この記事の図は、実際にこのDPを実装して描いています）。
+表の左上から順に `Q` を埋めていき、最後に右下から**逆にたどれば**、最適な経路（＝アライメント）が復元できます。上の図の赤い経路は、まさにこの計算で得たものです（この章の図は、実際にこのDPを実装して描いています）。
 
 ## 学習の中でどう使われるか
 
@@ -85,7 +85,7 @@ flowchart LR
 Glow-TTS では MAS は「厳密な対数尤度」を最大化するアライメントを探します。VITS の目的関数は尤度ではなく ELBO なので、論文では **MASを「ELBOを最大化するアライメント（＝潜在変数 z の対数尤度を最大化するアライメント）を探す」ように再定義**しています。やっていることの骨格は同じです。
 :::
 
-## 猫のまとめ 🪜
+## まとめ 🪜
 
 - MAS = 音素とフレームの対応を、**尤度が最大の"単調な"経路**として**動的計画法**で探すアルゴリズム。
 - **単調**(順序を守り後戻り・飛ばしなし)という制約が、音声の自然さに合致し、**スキップ・繰り返しを原理的に防ぐ**。
@@ -99,4 +99,4 @@ Glow-TTS では MAS は「厳密な対数尤度」を最大化するアライメ
 
 - [Glow-TTS (arXiv:2005.11129)](https://arxiv.org/abs/2005.11129) ― MAS の提案
 - [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103) / 実装 [jaywalnut310/vits](https://github.com/jaywalnut310/vits)
-- 関連記事: [猫でもわかるVITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [猫でもわかるSDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) / [猫でもわかるFlow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)
+- 関連する章: [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [SDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp) / [音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) / [Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)

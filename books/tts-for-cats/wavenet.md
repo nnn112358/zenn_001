@@ -4,12 +4,12 @@ title: "WaveNet ― ニューラルボコーダの元祖を図で理解する"
 
 ## この章について
 
-[猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)や[TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)で、ボコーダの系譜を「**WaveNet** → WaveRNN → … → HiFi-GAN」と何度もたどってきました。この記事は、その**いちばん根っこ**にある WaveNet の話です。
+[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)や[TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)で、ボコーダの系譜を「**WaveNet** → WaveRNN → … → HiFi-GAN」と何度もたどってきました。この章は、その**いちばん根っこ**にある WaveNet の話です。
 
-WaveNet(2016, DeepMind)は、**生の音声波形をニューラルネットで直接生成する**という発想を確立した、ニューラルボコーダの元祖。当時の音声合成を一気に「人間並み」に近づけた立役者です。中心にあるのは **自己回帰** と **拡張因果畳み込み** という2つのアイデア。猫でもわかるように図で解いていきます。🌊
+WaveNet(2016, DeepMind)は、**生の音声波形をニューラルネットで直接生成する**という発想を確立した、ニューラルボコーダの元祖。当時の音声合成を一気に「人間並み」に近づけた立役者です。中心にあるのは **自己回帰** と **拡張因果畳み込み** という2つのアイデア。図で解いていきます。🌊
 
 :::message
-WaveNet: van den Oord et al., *"WaveNet: A Generative Model for Raw Audio"* (2016, [arXiv:1609.03499](https://arxiv.org/abs/1609.03499))。本記事の仕様は論文本文で確認しています。拡張畳み込みの図は matplotlib、フローチャートは mermaid で作成しました。
+WaveNet: van den Oord et al., *"WaveNet: A Generative Model for Raw Audio"* (2016, [arXiv:1609.03499](https://arxiv.org/abs/1609.03499))。本章の仕様は論文本文で確認しています。拡張畳み込みの図は matplotlib、フローチャートは mermaid で作成しました。
 :::
 
 ## 3行で言うと
@@ -20,7 +20,7 @@ WaveNet: van den Oord et al., *"WaveNet: A Generative Model for Raw Audio"* (201
 
 ## 何をしたいのか
 
-音声は、1秒あたり16,000〜24,000個ものサンプル(数値)の列です([→メルの記事](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram))。WaveNet の目標は、この**生の波形を、音声らしく1個ずつ並べていく**こと。画像を1画素ずつ、文章を1単語ずつ生成する自己回帰モデルの、音声版だと思ってください。
+音声は、1秒あたり16,000〜24,000個ものサンプル(数値)の列です([→メルの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram))。WaveNet の目標は、この**生の波形を、音声らしく1個ずつ並べていく**こと。画像を1画素ずつ、文章を1単語ずつ生成する自己回帰モデルの、音声版だと思ってください。
 
 ## WaveNetのアイデア:1サンプルずつの自己回帰
 
@@ -89,7 +89,7 @@ flowchart LR
     classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
 ```
 
-## 猫のまとめ 🌊
+## まとめ 🌊
 
 - WaveNet = **生の波形を1サンプルずつ予測して作る**自己回帰モデル。ニューラルボコーダの元祖。
 - **拡張因果畳み込み**(過去だけ見る＝因果 × 飛ばし畳み＝拡張)で、**少ない層で広い受容野**を得るのが心臓部。
@@ -102,4 +102,4 @@ flowchart LR
 ## 参考リンク
 
 - [WaveNet (arXiv:1609.03499)](https://arxiv.org/abs/1609.03499)
-- 関連記事: [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

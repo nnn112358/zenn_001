@@ -4,12 +4,12 @@ title: "LLM TTS ― 音声を「言語モデル」で喋らせるという発想
 
 ## この章について
 
-前回の [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) は「LLMに喋らせる」タイプのTTSでした。実はこれ、VALL-E や CosyVoice、Bark、XTTS…… と、近年の多くのモデルが共有する**大きな路線**の一員です。この記事では、その **LLM TTS(コーデック言語モデル型TTS)** というパラダイムを、一段上から俯瞰します。
+前回の [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) は「LLMに喋らせる」タイプのTTSでした。実はこれ、VALL-E や CosyVoice、Bark、XTTS…… と、近年の多くのモデルが共有する**大きな路線**の一員です。この章では、その **LLM TTS(コーデック言語モデル型TTS)** というパラダイムを、一段上から俯瞰します。
 
-キーワードは **「音声生成を、言語モデル(LM)の問題として解く」**。GPT が次の単語を予測するのと同じ要領で、**次の"音声トークン"を予測**して喋る——この発想を、猫でもわかるように解きほぐします。🤖
+キーワードは **「音声生成を、言語モデル(LM)の問題として解く」**。GPT が次の単語を予測するのと同じ要領で、**次の"音声トークン"を予測**して喋る——この発想を、解きほぐします。🤖
 
 :::message
-この記事は個別モデルの詳細ではなく、**共通する考え方**の解説です。代表例(VALL-E / AudioLM / SoundStorm / MaskGCT / Fish-Speech / Qwen3-TTS 等)の位置関係は [TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) を参照してください。数値は各論文本文で確認しています。図は matplotlib と mermaid で作成しました。
+この章は個別モデルの詳細ではなく、**共通する考え方**の解説です。代表例(VALL-E / AudioLM / SoundStorm / MaskGCT / Fish-Speech / Qwen3-TTS 等)の位置関係は [TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) を参照してください。数値は各論文本文で確認しています。図は matplotlib と mermaid で作成しました。
 :::
 
 ## 3行で言うと
@@ -92,7 +92,7 @@ flowchart LR
 | **Masked** | SoundStorm / MaskGCT | **高速** | マスクを段階的に埋める(MaskGIT風) |
 | **MTP** | [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) | **超低遅延** | 全層を1ステップで予測 |
 
-なお [Fish-Speech](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech) は RVQ ではなく **GFSQ(Grouped Finite Scalar Quantization)** という独自の量子化を使い、意味/音響の二段分割自体を避けています。DualAR(Slow + Fast の2段 Transformer）で高速かつ安定。G2P も不要で、LLM がテキストを直接処理します（[→Fish-Speechの記事](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech)）。
+なお [Fish-Speech](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech) は RVQ ではなく **GFSQ(Grouped Finite Scalar Quantization)** という独自の量子化を使い、意味/音響の二段分割自体を避けています。DualAR(Slow + Fast の2段 Transformer）で高速かつ安定。G2P も不要で、LLM がテキストを直接処理します（[→Fish-Speechの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech)）。
 
 ## 弱点
 
@@ -130,7 +130,7 @@ flowchart LR
 
 どちらが上というより、**得意が違う**。安定・高速なら [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) 系、zero-shot や大規模なら LLM TTS、という住み分けです。最近は CosyVoice のように **LM + [Flow Matching](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow-matching)** のハイブリッドも増えています。
 
-## 猫のまとめ 🤖
+## まとめ 🤖
 
 - LLM TTS = **音声を離散トークン列にして、LMが次のトークンを自己回帰生成**する路線(=音声版のGPT)。
 - 部品は **コーデック + 自己回帰LM + 条件づけ**。トークンは **意味(何を言う)** と **音響(どう響く)** の2種で、粗→細に生成（AudioLM が確立した設計）。
@@ -144,4 +144,4 @@ flowchart LR
 
 - [VALL-E (arXiv:2301.02111)](https://arxiv.org/abs/2301.02111) / [AudioLM (arXiv:2209.03143)](https://arxiv.org/abs/2209.03143) / [SoundStorm (arXiv:2305.09636)](https://arxiv.org/abs/2305.09636)
 - [MaskGCT (arXiv:2409.00750)](https://arxiv.org/abs/2409.00750) / [Fish-Speech (arXiv:2411.01156)](https://arxiv.org/abs/2411.01156)
-- 関連記事: [猫でもわかるEnCodec](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec) / [猫でもわかるQwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) / [猫でもわかるVITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [猫でもわかるVAE](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vae) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [EnCodec](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec) / [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) / [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [VAE](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vae) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

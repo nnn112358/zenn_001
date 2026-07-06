@@ -6,10 +6,10 @@ title: "Glow-TTS ― Flow と MAS が出会う、VITSの前身"
 
 これまで [Flow(正規化フロー)](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) と [MAS(単調アライメント探索)](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas) を別々に解説してきました。**Glow-TTS** は、その2つが**出会って1つの音響モデルになる場所**です。そして [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) の**直接の前身**でもあります。
 
-Glow-TTS(2020)は、**テキストからメルスペクトログラムを"並列に"生成する**音響モデル。自己回帰の Tacotron 2 が抱えていた「遅い」「注意が壊れる」という弱点を、**Flow と MAS**で解決しました。これまでの記事がここで合流します。猫でもわかるように見ていきましょう。✨
+Glow-TTS(2020)は、**テキストからメルスペクトログラムを"並列に"生成する**音響モデル。自己回帰の Tacotron 2 が抱えていた「遅い」「注意が壊れる」という弱点を、**Flow と MAS**で解決しました。ここまでの章がここで合流します。見ていきましょう。✨
 
 :::message
-Glow-TTS: Kim et al., *"Glow-TTS: A Generative Flow for Text-to-Speech via Monotonic Alignment Search"* (2020, [arXiv:2005.11129](https://arxiv.org/abs/2005.11129))。本記事の仕様は論文本文で確認しています。展開の図は matplotlib、フローチャートは mermaid です。
+Glow-TTS: Kim et al., *"Glow-TTS: A Generative Flow for Text-to-Speech via Monotonic Alignment Search"* (2020, [arXiv:2005.11129](https://arxiv.org/abs/2005.11129))。本章の仕様は論文本文で確認しています。展開の図は matplotlib、フローチャートは mermaid です。
 :::
 
 ## 3行で言うと
@@ -31,13 +31,13 @@ Glow-TTS はこれを、2つの柱で作り直します。
 
 Glow-TTS の背骨は [正規化フロー](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)です。メルの条件付き分布 `P(mel | テキスト)` を、単純な事前分布 `P(z | テキスト)` を**可逆な変換 f で写して**表現します。学習時はメルを `z` に変換して(順方向)、変数変換の公式で**厳密な尤度**を計算し最大化。生成時は逆に `z` からメルを作ります(逆方向)。
 
-デコーダの中身は、[Flow の記事](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)で出てきた **ActNorm + 可逆1×1畳み込み + アフィンカップリング** のブロックの積み重ね(WaveGlow/Glow と同じ部品)。可逆なので、順・逆どちらも**並列**に計算でき、これが高速生成につながります。
+デコーダの中身は、[Flow の章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)で出てきた **ActNorm + 可逆1×1畳み込み + アフィンカップリング** のブロックの積み重ね(WaveGlow/Glow と同じ部品)。可逆なので、順・逆どちらも**並列**に計算でき、これが高速生成につながります。
 
 ## 柱②:MAS(単調アライメント探索)
 
 もう一つの柱が [MAS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas)。実は **MAS はこの Glow-TTS で提案された**アルゴリズムです。
 
-テキスト側は、各音素について「その音素らしい潜在の事前分布(平均 μ)」を持っています。MAS は、音声から得た `z` に対して、**尤度が最大になる単調な対応**を動的計画法で探します。外部ツールに頼らず、しかも単調(順序を守り飛ばさない)なので、注意のような崩壊が起きません。詳しくは[MASの記事](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas)へ。
+テキスト側は、各音素について「その音素らしい潜在の事前分布(平均 μ)」を持っています。MAS は、音声から得た `z` に対して、**尤度が最大になる単調な対応**を動的計画法で探します。外部ツールに頼らず、しかも単調(順序を守り飛ばさない)なので、注意のような崩壊が起きません。詳しくは[MASの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas)へ。
 
 ## どう並列に生成するのか
 
@@ -108,7 +108,7 @@ Glow-TTS の Flow + MAS は、そのまま [VITS](https://zenn.dev/nnn112358/boo
 
 と足していったもの。**Glow-TTS は、VITS という完成形の一歩手前**なのです。
 
-## 猫のまとめ ✨
+## まとめ ✨
 
 - Glow-TTS = **Flow(可逆変換)+ MAS(単調アライメント)** による**並列**音響モデル(テキスト → メル)。
 - Tacotron 2 に対し、**速い・頑健・制御しやすい**。MAS はここで生まれた。
@@ -116,9 +116,9 @@ Glow-TTS の Flow + MAS は、そのまま [VITS](https://zenn.dev/nnn112358/boo
 - メルまでなので、波形化には**ボコーダ(HiFi-GAN等)が別途必要**(2段)。
 - **VITS の直接の前身**。ここに VAE・GAN・SDP を足すと VITS になる。
 
-これまで別々に見てきた [Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) と [MAS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas) が、Glow-TTS で1つの形になり、[VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) へと続いていく——シリーズの点と点がつながる記事でした。
+これまで別々に見てきた [Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) と [MAS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas) が、Glow-TTS で1つの形になり、[VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) へと続いていく——本書の点と点がつながる章でした。
 
 ## 参考リンク
 
 - [Glow-TTS (arXiv:2005.11129)](https://arxiv.org/abs/2005.11129) / 実装 [jaywalnut310/glow-tts](https://github.com/jaywalnut310/glow-tts)
-- 関連記事: [猫でもわかるFlow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) / [猫でもわかるMAS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas) / [猫でもわかるVITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model)
+- 関連する章: [Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) / [MAS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mas) / [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model)

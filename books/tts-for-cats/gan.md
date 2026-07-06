@@ -10,7 +10,7 @@ title: "GAN ― VITSを支える\"G\"(GAN)を図で理解する"
 **用語の注意**:「VAE + Flow + GAN」はVITSを構成する3つの技術のこと。VITSの正式名称は **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(頭文字は V・I・T・S)で、VAE+Flow+GAN の頭文字を並べたものではありません。
 :::
 
-[猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)で「偽造者と鑑定士」の比喩を使いましたが、あれはGANの一応用でした。今回は**GANという仕組みそのもの**を、猫でもわかるように解説します。TTSの音づくりでGANがなぜ効くのかも、最後にちゃんと回収します。😼
+[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)で「偽造者と鑑定士」の比喩を使いましたが、あれはGANの一応用でした。今回は**GANという仕組みそのもの**を、解説します。TTSの音づくりでGANがなぜ効くのかも、最後にちゃんと回収します。😼
 
 :::message
 GANは生成モデル三兄弟(VAE・Flow・GAN)の最後の一角。原論文は Goodfellow et al. (2014, [arXiv:1406.2661](https://arxiv.org/abs/1406.2661))。TTSでの利用は HiFi-GAN / VITS の論文で確認しています。図は numpy + matplotlib で自作しました。
@@ -143,13 +143,13 @@ flowchart LR
     classDef red fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#111827
 ```
 
-- **ボコーダ**: MelGAN → Parallel WaveGAN → **HiFi-GAN** → BigVGAN / Vocos。いずれもGANで波形をシャープに(→[HiFi-GAN記事](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)。HiFi-GANのMPD/MSDは"複数の鑑定士"の好例)。
+- **ボコーダ**: MelGAN → Parallel WaveGAN → **HiFi-GAN** → BigVGAN / Vocos。いずれもGANで波形をシャープに(→[HiFi-GANの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)。HiFi-GANのMPD/MSDは"複数の鑑定士"の好例)。
 - **VITS**: 波形ドメインに**敵対的学習**を適用。総損失の $L_{adv}(G) + L_{fm}(G)$ がまさにGAN部分で、これが「**VAE + Flow + GAN**」の **G**。
 - **StyleTTS 2**: 音声言語モデル(WavLM)を識別器に使う敵対的学習で人間並みの品質を達成。
 
 つまりGANは、**VAEやFlowが作った"構造"に、最後の"生々しさ"を与える**役回り。VITSではこの3つが1つのモデルに同居しているわけです。
 
-## 猫のまとめ 😼
+## まとめ 😼
 
 - GAN = **偽造者(G)と鑑定士(D)のいたちごっこ**で本物そっくりを作る生成モデル。
 - **ミニマックスゲーム**を解く。尤度を使わず「騙せるか」だけで学習 → 尖鋭・高品質だが**不安定**(モード崩壊・勾配消失)。
@@ -164,4 +164,4 @@ flowchart LR
 - [GAN原論文: Generative Adversarial Networks (arXiv:1406.2661)](https://arxiv.org/abs/1406.2661)
 - [DCGAN (arXiv:1511.06434)](https://arxiv.org/abs/1511.06434) / [LSGAN (arXiv:1611.04076)](https://arxiv.org/abs/1611.04076) / [WGAN (arXiv:1701.07875)](https://arxiv.org/abs/1701.07875)
 - [HiFi-GAN (arXiv:2010.05646)](https://arxiv.org/abs/2010.05646) / [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103)
-- 関連記事: [猫でもわかるVAE](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vae) / [猫でもわかるFlow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [VAE](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vae) / [Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

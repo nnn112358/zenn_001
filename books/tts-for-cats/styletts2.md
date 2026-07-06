@@ -6,10 +6,10 @@ title: "StyleTTS 2 ― Style Diffusion と WavLM で人間超えを果たしたT
 
 これまで [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) を「人間並み品質」の到達点として見てきましたが、そこを**さらに超えた**と報告されたモデルが **StyleTTS 2**(2023)です。LJSpeech で**人間の録音を上回る**評価(CMOS +0.28)を出しました。
 
-カギは2つ、**Style Diffusion**(スタイルを拡散モデルで生成)と、**SLM(大規模音声言語モデル WavLM)を識別器に使う敵対的学習**。これまでの記事の [GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/gan)・[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)・[iSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet) に、拡散モデルと巨大事前学習モデルが合わさる形です。猫でもわかるように見ていきましょう。🎭
+カギは2つ、**Style Diffusion**(スタイルを拡散モデルで生成)と、**SLM(大規模音声言語モデル WavLM)を識別器に使う敵対的学習**。ここまでの章の [GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/gan)・[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)・[iSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet) に、拡散モデルと巨大事前学習モデルが合わさる形です。見ていきましょう。🎭
 
 :::message
-StyleTTS 2: Li, Han, Mesgarani (2023, [arXiv:2306.07691](https://arxiv.org/abs/2306.07691))。前身の StyleTTS(2022)を土台にしています。本記事の仕様・数値は論文本文で確認しています。スタイルの図は matplotlib、フローチャートは mermaid です。
+StyleTTS 2: Li, Han, Mesgarani (2023, [arXiv:2306.07691](https://arxiv.org/abs/2306.07691))。前身の StyleTTS(2022)を土台にしています。本章の仕様・数値は論文本文で確認しています。スタイルの図は matplotlib、フローチャートは mermaid です。
 :::
 
 ## 3行で言うと
@@ -97,7 +97,7 @@ flowchart LR
 
 「単段・公開データで、初めて人間レベルを達成」した点が画期的でした。
 
-## 猫のまとめ 🎭
+## まとめ 🎭
 
 - StyleTTS 2 = **スタイル(音素以外の話し方すべて)を1本のベクトルで操る**TTS。人間超えを達成。
 - **Style Diffusion**:スタイルを拡散モデルで生成(参照音声なし・多様)。小さなベクトルだけ拡散するので**3ステップで速い**。
@@ -110,4 +110,4 @@ flowchart LR
 ## 参考リンク
 
 - [StyleTTS 2 (arXiv:2306.07691)](https://arxiv.org/abs/2306.07691) / 実装 [yl4579/StyleTTS2](https://github.com/yl4579/StyleTTS2) / 前身 [StyleTTS (arXiv:2205.15439)](https://arxiv.org/abs/2205.15439)
-- 関連記事: [猫でもわかるGAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/gan) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [猫でもわかるiSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet) / [猫でもわかるVITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/gan) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [iSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet) / [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

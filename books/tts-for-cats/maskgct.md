@@ -4,12 +4,12 @@ title: "MaskGCT ― マスク予測で「完全非自己回帰」の zero-shot T
 
 ## この章について
 
-[LLM TTS の記事](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/llm-tts)で、音声トークンの生成戦略には **AR+NAR**([VALL-E](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/valle))、**マスク予測**(SoundStorm)、**MTP**([Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts))の3つがあると紹介しました。今回はそのマスク予測方式を極めた **MaskGCT**(2024, CUHK Shenzhen)を見ます。
+[LLM TTS の章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/llm-tts)で、音声トークンの生成戦略には **AR+NAR**([VALL-E](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/valle))、**マスク予測**(SoundStorm)、**MTP**([Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts))の3つがあると紹介しました。今回はそのマスク予測方式を極めた **MaskGCT**(2024, CUHK Shenzhen)を見ます。
 
 MaskGCT は**テキスト→意味トークン → 音響トークンの両段階をマスク予測**で解いた、**完全非自己回帰** の zero-shot TTS です。明示的なテキスト-音声アライメントも、音素レベルの継続長予測も不要。それでいて**人間の録音を上回る自然さ**(CMOS +0.10 vs GT)を達成しています。
 
 :::message
-MaskGCT: Wang et al., *"MaskGCT: Zero-Shot Text-to-Speech with Masked Generative Codec Transformer"* (2024, [arXiv:2409.00750](https://arxiv.org/abs/2409.00750))。100K時間で学習。SoundStorm: Borsos et al., *"SoundStorm"* (2023, [arXiv:2305.09636](https://arxiv.org/abs/2305.09636))。本記事の仕様・数値は両論文で確認しています。図は mermaid で作成しました。
+MaskGCT: Wang et al., *"MaskGCT: Zero-Shot Text-to-Speech with Masked Generative Codec Transformer"* (2024, [arXiv:2409.00750](https://arxiv.org/abs/2409.00750))。100K時間で学習。SoundStorm: Borsos et al., *"SoundStorm"* (2023, [arXiv:2305.09636](https://arxiv.org/abs/2305.09636))。本章の仕様・数値は両論文で確認しています。図は mermaid で作成しました。
 :::
 
 ## 3行で言うと
@@ -159,7 +159,7 @@ VALL-E が開いた「音声トークンの言語モデリング」に対する3
 
 MaskGCT は「AR を一切使わない」という選択で、頑健性と品質を両立した到達点です。
 
-## 猫のまとめ 🎭
+## まとめ 🎭
 
 - MaskGCT = **テキスト→意味、意味→音響の両段階をマスク予測**で生成する完全非自己回帰 zero-shot TTS。
 - **「全部マスクして、自信がある所から順に埋める」** 反復デコード。AR の読み飛ばし・繰り返しが構造的に起きない。
@@ -170,4 +170,4 @@ MaskGCT は「AR を一切使わない」という選択で、頑健性と品質
 ## 参考リンク
 
 - [MaskGCT (arXiv:2409.00750)](https://arxiv.org/abs/2409.00750) / [SoundStorm (arXiv:2305.09636)](https://arxiv.org/abs/2305.09636)
-- 関連記事: [猫でもわかるLLM TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/llm-tts) / [猫でもわかるVALL-E](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/valle) / [猫でもわかるEnCodec](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec) / [猫でもわかるFish-Speech](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech) / [猫でもわかるQwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts)
+- 関連する章: [LLM TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/llm-tts) / [VALL-E](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/valle) / [EnCodec](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec) / [Fish-Speech](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech) / [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts)

@@ -4,7 +4,7 @@ title: "iSTFTNet ― HiFi-GANの終盤をiSTFTに任せて軽くする"
 
 ## この章について
 
-前回の[猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)で、メルスペクトログラムを波形に変えるGANボコーダを見ました。今回はその**軽量・高速版**、**iSTFTNet** の話です。
+前回の[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)で、メルスペクトログラムを波形に変えるGANボコーダを見ました。今回はその**軽量・高速版**、**iSTFTNet** の話です。
 
 アイデアは一言でいうと、**「HiFi-GANが最後まで頑張って波形を作っている終盤の部分を、枯れた信号処理である iSTFT(逆短時間フーリエ変換)に丸投げする」**。これで品質をほぼ保ったまま、速く・小さくなります。後で出てくる Vocos や MB-iSTFT-VITS の**布石**でもある、重要な一手です。🐾
 
@@ -20,7 +20,7 @@ title: "iSTFTNet ― HiFi-GANの終盤をiSTFTに任せて軽くする"
 
 ## ボコーダが解いている「3つの逆問題」
 
-論文はまず、メルボコーダの仕事を綺麗に分解します。メルスペクトログラムは、波形から次の手順で作られました([メルの記事](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram)参照)。
+論文はまず、メルボコーダの仕事を綺麗に分解します。メルスペクトログラムは、波形から次の手順で作られました([メルの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram)参照)。
 
 1. STFTで**振幅**と**位相**のスペクトログラムを得る
 2. **位相を捨てる**
@@ -170,7 +170,7 @@ flowchart LR
 
 実際、Vocosの論文は iSTFTNet をこう評しています——「最適モデルは最後の2つのアップサンプルブロックしか iSTFT に置き換えられず、それ以上置き換えると品質が急落する」。iSTFTNetが見つけた**限界**を、Vocosが**骨格の工夫**で突破した、という綺麗な系譜です(→[TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits))。
 
-## 猫のまとめ 🐾
+## まとめ 🐾
 
 - iSTFTNet = **HiFi-GANの終盤を iSTFT に任せた**軽量・高速ボコーダ。
 - ネットは**周波数次元を小さく整える**ところまでやり、**周波数→時間＋位相は iSTFT** が担当。
@@ -184,4 +184,4 @@ flowchart LR
 
 - 論文: [iSTFTNet (arXiv:2203.02395)](https://arxiv.org/abs/2203.02395)
 - 実装(コミュニティ版): [rishikksh20/iSTFTNet-pytorch](https://github.com/rishikksh20/iSTFTNet-pytorch)
-- 関連記事: [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

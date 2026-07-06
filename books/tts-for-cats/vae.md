@@ -4,16 +4,16 @@ title: "VAE ― VITSを支える\"V\"(VAE)を図で理解する"
 
 ## この章について
 
-前回の[猫でもわかるFlow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)で、VITSを構成する「**VAE + Flow + GAN**」のうち "F" を解説しました。今回はその3本柱のひとつ、**VAE(変分オートエンコーダ / Variational Autoencoder)** です。
+前回の[Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)で、VITSを構成する「**VAE + Flow + GAN**」のうち "F" を解説しました。今回はその3本柱のひとつ、**VAE(変分オートエンコーダ / Variational Autoencoder)** です。
 
 :::message
 **用語の注意**:「VAE + Flow + GAN」はVITSを構成する3つの技術のこと。VITSの正式名称は **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(頭文字は V・I・T・S)で、VAE+Flow+GAN の頭文字を並べたものではありません。
 :::
 
-VAEは、生成モデル三兄弟(VAE・GAN・Flow)の一角。ひとことで言うと **「オートエンコーダに"確率の衣"を着せて、新しいデータを生成できるようにしたもの」**。そして実は、**VITSはまるごと1つの条件付きVAE**なんです。猫でもわかるように、図と最小限の数式でいきます。😺
+VAEは、生成モデル三兄弟(VAE・GAN・Flow)の一角。ひとことで言うと **「オートエンコーダに"確率の衣"を着せて、新しいデータを生成できるようにしたもの」**。そして実は、**VITSはまるごと1つの条件付きVAE**なんです。図と最小限の数式でいきます。😺
 
 :::message
-この記事を読むと、これまでの記事(メル → HiFi-GAN → Flow)が **VITSという1つのVAEに合流する**のが見えてきます。数値・枠組みは論文本文で確認しています。図は numpy + matplotlib で自作しました。
+この章を読むと、ここまでの章(メル → HiFi-GAN → Flow)が **VITSという1つのVAEに合流する**のが見えてきます。数値・枠組みは論文本文で確認しています。図は numpy + matplotlib で自作しました。
 :::
 
 ## 3行で言うと
@@ -156,13 +156,13 @@ $$
 
 **VITS = VAE(骨格) + Flow(事前分布) + GAN(デコーダ学習)**
 
-これまでの記事([メル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram)・[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)・[Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow))が、**この1本の式に合流**します。VITSの "V" は、単なる飾りではなく屋台骨だったわけです。
+ここまでの章([メル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram)・[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)・[Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow))が、**この1本の式に合流**します。VITSの "V" は、単なる飾りではなく屋台骨だったわけです。
 
 :::message
 VAEには離散版のいとこ **VQ-VAE**(潜在を"コードブック"の離散トークンにする)もいます。これが **SoundStream → EnCodec → DAC** というニューラルコーデックの源流になり、VALL-E などの **Codec LM** につながります(→[TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits))。VAEはTTSの至るところに顔を出します。
 :::
 
-## 猫のまとめ 😺
+## まとめ 😺
 
 - VAE = **入力を"分布"に圧縮 → サンプリング → 復元**する生成モデル。素のAEに確率の衣を着せたもの。
 - 損失は **ELBO = 再構成 + KL正則化** の2項。**KL項が潜在空間を N(0,I) に整える**から、ノイズから生成できる。
@@ -177,4 +177,4 @@ VAEには離散版のいとこ **VQ-VAE**(潜在を"コードブック"の離散
 - [Auto-Encoding Variational Bayes(VAE原論文, arXiv:1312.6114)](https://arxiv.org/abs/1312.6114)
 - [VQ-VAE: Neural Discrete Representation Learning (arXiv:1711.00937)](https://arxiv.org/abs/1711.00937)
 - [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103)
-- 関連記事: [猫でもわかるFlow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
