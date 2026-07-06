@@ -127,5 +127,5 @@ flowchart LR
 - 関連記事: [猫でもわかるQwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats) / [猫でもわかるVITS](https://zenn.dev/nnn112358/articles/vits-for-cats) / [猫でもわかるVAE](https://zenn.dev/nnn112358/articles/vae-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [BERT](https://zenn.dev/nnn112358/articles/bert-for-cats) ／ 次: [Qwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全25本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [BERT](https://zenn.dev/nnn112358/articles/bert-for-cats) ／ 次: [Qwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats)
 :::

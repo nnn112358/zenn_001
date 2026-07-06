@@ -1,5 +1,5 @@
 ---
-title: "猫でもわかるTTS 目次 ― 全21本の読む順ガイド"
+title: "猫でもわかるTTS 目次 ― 全25本の読む順ガイド"
 emoji: "🐾"
 type: "tech"
 topics: ["tts", "音声合成", "機械学習", "深層学習", "vits"]
@@ -10,7 +10,7 @@ published: false
 
 「猫でもわかる」は、TTS(音声合成)のしくみを、**1記事1テーマ**で、図と最小限の数式だけで解きほぐすシリーズです。各記事は独立して読めますが、順番に読むと「テキストが音になるまで」の全体像と、その裏にある生成モデルの考え方、そして最前線までが一本につながるように作ってあります。
 
-この記事はその**目次**です。全21本を、**3つの読むルート**に分けて案内します。🐾
+この記事はその**目次**です。全25本を、**3つの読むルート＋発展トピック**に分けて案内します。🐾
 
 :::message
 各記事の技術的な主張は、元論文を実際に読んで確認した内容に基づいています。図はすべて自作(matplotlib / mermaid)です。俯瞰には姉妹記事「[VITSから見るTTS 10系統マップ(2016–2026)](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)」もどうぞ。
@@ -81,6 +81,17 @@ VITSを構成する生成モデルと部品を、1つずつ理解するルート
 | # | 記事 | ひとこと |
 |---|---|---|
 | 21 | [MobileNet](https://zenn.dev/nnn112358/articles/mobilenet-for-cats) | 軽量モデルの主役。音声にも効く部品 |
+
+## 追補編(発展トピック)
+
+パイプラインの理解が進んだら、より深い話題や歴史・最前線の要素技術へ。
+
+| # | 記事 | ひとこと |
+|---|---|---|
+| 22 | [Tacotron](https://zenn.dev/nnn112358/articles/tacotron-for-cats) | 文字から音を直接作った、E2E TTSの原点 |
+| 23 | [EnCodec](https://zenn.dev/nnn112358/articles/encodec-for-cats) | 音声を離散トークンにするニューラルコーデック |
+| 24 | [Flow Matching](https://zenn.dev/nnn112358/articles/flow-matching-for-cats) | ノイズ→データへ「まっすぐ」進む生成 |
+| 25 | [F5-TTS](https://zenn.dev/nnn112358/articles/f5-tts-for-cats) | 継続長予測もテキストエンコーダも無しで喋る |
 
 ## こんな人はここから
 

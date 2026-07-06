@@ -184,5 +184,5 @@ VAEには離散版のいとこ **VQ-VAE**(潜在を"コードブック"の離散
 - 関連記事: [猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全21本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Vocos](https://zenn.dev/nnn112358/articles/vocos-for-cats) ／ 次: [Flow](https://zenn.dev/nnn112358/articles/flow-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全25本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Vocos](https://zenn.dev/nnn112358/articles/vocos-for-cats) ／ 次: [Flow](https://zenn.dev/nnn112358/articles/flow-for-cats)
 :::

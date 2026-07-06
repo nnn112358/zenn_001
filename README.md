@@ -29,6 +29,10 @@
 - `articles/llm-tts-for-cats.md` — 猫でもわかるLLM TTS
 - `articles/zero-shot-for-cats.md` — 猫でもわかるzero-shot TTS
 - `articles/tts-for-cats-index.md` — 猫でもわかるTTS 目次
+- `articles/tacotron-for-cats.md` — 猫でもわかるTacotron
+- `articles/encodec-for-cats.md` — 猫でもわかるEnCodec
+- `articles/flow-matching-for-cats.md` — 猫でもわかるFlow Matching
+- `articles/f5-tts-for-cats.md` — 猫でもわかるF5-TTS
 
 ## ローカルプレビュー
 
