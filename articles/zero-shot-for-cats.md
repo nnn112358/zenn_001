@@ -87,7 +87,7 @@ flowchart LR
 - **VALL-E**:3秒プロンプトの in-context クローンで衝撃を与えた。
 - **XTTS**:条件づけエンコーダ + GPT、多言語。
 - **StyleTTS 2**:スタイル + 拡散で、**VALL-E の約1/250のデータ**でも高性能([→記事](https://zenn.dev/nnn112358/articles/styletts-for-cats))。
-- **CosyVoice / F5-TTS / Qwen3-TTS**:近年の高品質 zero-shot 勢。
+- **CosyVoice / [F5-TTS](https://zenn.dev/nnn112358/articles/f5-tts-for-cats) / [Qwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats)**:近年の高品質 zero-shot 勢。
 
 ## ひとこと倫理の話
 

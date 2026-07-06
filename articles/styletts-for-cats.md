@@ -2,7 +2,7 @@
 title: "猫でもわかるStyleTTS 2 ― Style Diffusion と WavLM で人間超えを果たしたTTS"
 emoji: "🎭"
 type: "tech"
-topics: ["tts", "音声合成", "diffusion", "機械学習", "deeplearning"]
+topics: ["tts", "音声合成", "diffusion", "機械学習", "深層学習"]
 published: false
 ---
 

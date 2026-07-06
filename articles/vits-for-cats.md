@@ -157,6 +157,9 @@ flowchart LR
 ```
 *上: 学習時は音声から z を作って再構成。下: 推論時は音声なし、テキスト側から z を作って生成。Posterior Encoder は学習専用。*
 
+![VITSの学習時と推論時](/images/vits-train-infer.png)
+*左: 学習時は音声(Posterior Encoder)とテキスト(Flow)の両方から z を挟み、KL損失で一致させる。右: 推論時は Posterior Encoder を外し、テキスト → Flow → z サンプル → Decoder だけで波形を生成。*
+
 ## なぜ効いた? そして系譜へ
 
 VITSの意義は、**2段の分離学習の限界を超えた**こと。中間表現(メル)を固定せず、E2Eで最適化することで、より自然で高品質な音声に到達しました。

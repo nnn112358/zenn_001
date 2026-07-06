@@ -153,7 +153,7 @@ flowchart LR
 | 学習 | 変数変換で厳密な尤度を最大化 | ベクトル場(速度場)を回帰(simulation-free) |
 | 代表 | Glow-TTS, VITS, WaveGlow | Voicebox, Matcha-TTS, **F5-TTS** |
 
-どちらも「ノイズをデータに変換する」点は同じですが、**中の仕組みはまったく別物**です。「flow」という単語だけで同一視しないよう注意(→系譜は[TTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)参照)。厳密には Flow Matching は「連続正規化フロー(CNF)」を効率よく学習する手法、という位置づけです。
+どちらも「ノイズをデータに変換する」点は同じですが、**中の仕組みはまったく別物**です。「flow」という単語だけで同一視しないよう注意(→系譜は[TTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)参照)。厳密には Flow Matching は「連続正規化フロー(CNF)」を効率よく学習する手法、という位置づけです。詳しくは[猫でもわかるFlow Matching](https://zenn.dev/nnn112358/articles/flow-matching-for-cats)で解説しています。
 
 ## 猫のまとめ 🐈‍⬛
 
