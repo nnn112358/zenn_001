@@ -84,5 +84,5 @@ F5-TTS は、Flow Matching 系TTSの到達点の一つです。
 - 関連記事: [猫でもわかるFlow Matching](https://zenn.dev/nnn112358/articles/flow-matching-for-cats) / [猫でもわかるzero-shot TTS](https://zenn.dev/nnn112358/articles/zero-shot-for-cats) / [猫でもわかるVocos(ConvNeXt)](https://zenn.dev/nnn112358/articles/vocos-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全25本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Flow Matching](https://zenn.dev/nnn112358/articles/flow-matching-for-cats) ／ 次: [zero-shot TTS](https://zenn.dev/nnn112358/articles/zero-shot-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全27本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Flow Matching](https://zenn.dev/nnn112358/articles/flow-matching-for-cats) ／ 次: [zero-shot TTS](https://zenn.dev/nnn112358/articles/zero-shot-for-cats)
 :::

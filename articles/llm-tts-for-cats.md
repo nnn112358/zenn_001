@@ -96,7 +96,7 @@ flowchart LR
 | **Masked** | SoundStorm / MaskGCT | **高速** | マスクを段階的に埋める(MaskGIT風) |
 | **MTP** | [Qwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats) | **超低遅延** | 全層を1ステップで予測 |
 
-なお Fish-Speech は RVQ ではなく **GFSQ(Grouped Finite Scalar Quantization)** という独自の量子化を使い、意味/音響の二段分割自体を避けています。DualAR(Slow + Fast の2段 Transformer）で高速かつ安定。G2P も不要で、LLM がテキストを直接処理します。
+なお [Fish-Speech](https://zenn.dev/nnn112358/articles/fish-speech-for-cats) は RVQ ではなく **GFSQ(Grouped Finite Scalar Quantization)** という独自の量子化を使い、意味/音響の二段分割自体を避けています。DualAR(Slow + Fast の2段 Transformer）で高速かつ安定。G2P も不要で、LLM がテキストを直接処理します（[→Fish-Speechの記事](https://zenn.dev/nnn112358/articles/fish-speech-for-cats)）。
 
 ## 弱点
 
@@ -151,5 +151,5 @@ flowchart LR
 - 関連記事: [猫でもわかるEnCodec](https://zenn.dev/nnn112358/articles/encodec-for-cats) / [猫でもわかるQwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats) / [猫でもわかるVITS](https://zenn.dev/nnn112358/articles/vits-for-cats) / [猫でもわかるVAE](https://zenn.dev/nnn112358/articles/vae-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全25本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [BERT](https://zenn.dev/nnn112358/articles/bert-for-cats) ／ 次: [Qwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全27本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [BERT](https://zenn.dev/nnn112358/articles/bert-for-cats) ／ 次: [Qwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats)
 :::

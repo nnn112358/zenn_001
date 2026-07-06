@@ -105,5 +105,5 @@ flowchart LR
 - 関連記事: [猫でもわかるStyleTTS 2](https://zenn.dev/nnn112358/articles/styletts-for-cats) / [猫でもわかるVITS](https://zenn.dev/nnn112358/articles/vits-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全25本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [StyleTTS 2](https://zenn.dev/nnn112358/articles/styletts-for-cats) ／ 次: [LLM TTS](https://zenn.dev/nnn112358/articles/llm-tts-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全27本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [StyleTTS 2](https://zenn.dev/nnn112358/articles/styletts-for-cats) ／ 次: [LLM TTS](https://zenn.dev/nnn112358/articles/llm-tts-for-cats)
 :::

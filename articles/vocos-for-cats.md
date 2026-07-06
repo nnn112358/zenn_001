@@ -96,5 +96,5 @@ flowchart LR
 - 関連記事: [猫でもわかるiSTFTNet](https://zenn.dev/nnn112358/articles/istftnet-for-cats) / [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全25本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [iSTFTNet](https://zenn.dev/nnn112358/articles/istftnet-for-cats) ／ 次: [VAE](https://zenn.dev/nnn112358/articles/vae-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全27本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [iSTFTNet](https://zenn.dev/nnn112358/articles/istftnet-for-cats) ／ 次: [VAE](https://zenn.dev/nnn112358/articles/vae-for-cats)
 :::

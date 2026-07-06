@@ -106,5 +106,5 @@ Glow-TTS では MAS は「厳密な対数尤度」を最大化するアライメ
 - 関連記事: [猫でもわかるVITS](https://zenn.dev/nnn112358/articles/vits-for-cats) / [猫でもわかるSDP](https://zenn.dev/nnn112358/articles/sdp-for-cats) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) / [猫でもわかるFlow](https://zenn.dev/nnn112358/articles/flow-for-cats)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全25本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [GAN](https://zenn.dev/nnn112358/articles/gan-for-cats) ／ 次: [SDP](https://zenn.dev/nnn112358/articles/sdp-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全27本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [GAN](https://zenn.dev/nnn112358/articles/gan-for-cats) ／ 次: [SDP](https://zenn.dev/nnn112358/articles/sdp-for-cats)
 :::

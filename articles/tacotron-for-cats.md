@@ -94,5 +94,5 @@ Tacotron は、**ニューラルE2E TTS の起点**です。ここから、
 - 関連記事: [猫でもわかる音響モデル(Tacotron 2)](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) / [猫でもわかるWaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats) / [猫でもわかるMAS](https://zenn.dev/nnn112358/articles/mas-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全25本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 次: [音響モデル(Tacotron 2)](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全27本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 次: [音響モデル(Tacotron 2)](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats)
 :::
