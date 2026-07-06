@@ -34,6 +34,7 @@
 - `articles/flow-matching-for-cats.md` — 猫でもわかるFlow Matching
 - `articles/f5-tts-for-cats.md` — 猫でもわかるF5-TTS
 - `articles/fish-speech-for-cats.md` — 猫でもわかるFish-Speech
+- `articles/tacotron2-for-cats.md` — 猫でもわかるTacotron 2
 
 ## ローカルプレビュー
 

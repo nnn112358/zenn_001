@@ -10,17 +10,17 @@ published: false
 
 このシリーズでは VITS や [Qwen3-TTS](https://zenn.dev/nnn112358/articles/qwen-tts-for-cats) といった現代のモデルを見てきましたが、今回は歴史をさかのぼって **Tacotron**(2017, Google)を見ます。**文字から音(スペクトログラム)を直接作った、エンドツーエンド(E2E)TTS の原点**です。
 
-いまでは当たり前の「文字を入れたら音が出る」——これを、人手の設計をほぼ捨てて、**seq2seq + Attention** ひとつで実現した記念碑的モデル。ここから [Tacotron 2](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) → 現代へと続く流れが始まりました。猫でもわかるように見ていきましょう。🌮
+いまでは当たり前の「文字を入れたら音が出る」——これを、人手の設計をほぼ捨てて、**seq2seq + Attention** ひとつで実現した記念碑的モデル。ここから [Tacotron 2](https://zenn.dev/nnn112358/articles/tacotron2-for-cats) → 現代へと続く流れが始まりました。猫でもわかるように見ていきましょう。🌮
 
 :::message
-Tacotron: Wang et al., *"Tacotron: Towards End-to-End Speech Synthesis"* (2017, [arXiv:1703.10135](https://arxiv.org/abs/1703.10135))。US英語で MOS 3.82(当時の商用パラメトリック方式を上回る)。本記事の仕様は論文本文で確認しています。図は matplotlib と mermaid で作成しました。
+Tacotron: Wang et al., *"Tacotron: Towards End-to-End Speech Synthesis"* (2017, [arXiv:1703.10135](https://arxiv.org/abs/1703.10135))。24.6時間・単一話者データで学習、MOS 3.82（当時の商用パラメトリック 3.69 を上回る）。本記事の仕様・数値は論文本文で確認しています。図は matplotlib と mermaid で作成しました。
 :::
 
 ## 3行で言うと
 
 - Tacotron = **文字列 →(seq2seq + Attention)→ スペクトログラム** を、ゼロから一括学習する最初期のE2E TTS。
 - **Attention が「どの文字を今喋るか」の対応(アライメント)を自分で学ぶ**。音素アライメントは不要。
-- 波形化は **Griffin-Lim**(ニューラルボコーダではない)。ここを WaveNet に差し替えたのが Tacotron 2。
+- 波形化は **Griffin-Lim**(ニューラルボコーダではない)。ここを WaveNet に差し替えたのが [Tacotron 2](https://zenn.dev/nnn112358/articles/tacotron2-for-cats)。
 
 ## 何が新しかったか:多段パイプラインを畳む
 
@@ -41,16 +41,46 @@ Tacotron の背骨は、機械翻訳などで使われていた **seq2seq(系列
 ![Tacotronの注意アライメント](/images/tacotron-attention.png)
 *縦が入力文字、横がスペクトログラムのフレーム(時間)。明るい帯が「そのフレームでどの文字に注目したか」。きれいな斜めの帯 = 文字が順番どおり音に対応している証拠で、これが崩れると読み飛ばしや繰り返しが起きる。*
 
+## CBHG:Tacotron 独自の特徴抽出器
+
+Tacotron の工夫の目玉が **CBHG** というモジュールです。名前は **1-D Convolution Bank + Highway network + Bidirectional GRU** の略。
+
+```mermaid
+%%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':46,'rankSpacing':50,'curve':'linear'}}}%%
+flowchart LR
+    IN("入力列"):::gray --> CB("Conv Bank\n(幅1..Kの畳み込み\nを束ねる)"):::blue
+    CB --> MP("MaxPool\n+ Conv"):::blue
+    MP --> HW("Highway Net\n(4層)"):::amber
+    HW --> GRU("双方向GRU\n(128セル)"):::purple
+    GRU --> OUT("出力列"):::green
+    classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
+    classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
+    classDef purple fill:#ede9fe,stroke:#7c3aed,stroke-width:2px,color:#111827
+    classDef green fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827
+    classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
+```
+
+Conv Bank が**異なるスケールの特徴を同時に捉え**(幅1〜Kの畳み込みをK本並べる)、Highway Net が情報を選択的に通し、双方向 GRU が文脈を前後から統合します。エンコーダ(K=16)と後処理ネット(K=8)の両方で使われます。
+
+## もう一つの工夫:Reduction Factor
+
+デコーダは1ステップで**r個のフレーム**を同時に生成します（論文では r=2〜5）。MOS評価は r=2 で実施。
+
+- デコーダのステップ数が **1/r** に減り、学習・推論が速くなる
+- Attention が**早く前に進める**ので収束も速い
+- フレーム単位の自己回帰なので、[WaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats)（サンプル単位）よりはるかに高速
+
 ## 全体像
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':46,'rankSpacing':50,'curve':'linear'}}}%%
 flowchart LR
-    C("文字列<br/>Tacotron"):::gray --> E("エンコーダ<br/>(CBHG)"):::blue
+    C("文字列"):::gray --> E("エンコーダ<br/>(CBHG)"):::blue
     E --> AT("Attention<br/>対応を学ぶ"):::amber
-    AT --> D("デコーダ<br/>フレーム単位で生成"):::purple
-    D --> S("スペクトログラム"):::green
-    S --> GL("Griffin-Lim<br/>(位相を復元)"):::gray
+    AT --> D("デコーダ<br/>(GRU, r=2)"):::purple
+    D --> MEL("メルスペクトログラム"):::green
+    MEL --> POST("後処理 CBHG<br/>メル→線形"):::blue
+    POST --> GL("Griffin-Lim<br/>(位相を復元)"):::gray
     GL --> W("波形"):::green
     classDef blue fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827
     classDef amber fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827
@@ -59,21 +89,21 @@ flowchart LR
     classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
 ```
 
-工夫の目玉が **CBHG** というモジュール(1次元畳み込みバンク + ハイウェイ網 + 双方向GRU)。文字列や中間表現から特徴をうまく引き出すために、エンコーダと後処理で使われます。
+デコーダが出すのは80帯域の**メルスペクトログラム**。そのあと**後処理 CBHG**(K=8)が全系列を見渡してメルから**線形スペクトログラム**に変換し、最後に **Griffin-Lim**（約50回の反復で位相を推定）で波形にします。
 
-また、[WaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats) が波形を**サンプル単位**で作る(ゆえに遅い)のに対し、Tacotron は**フレーム単位**でスペクトログラムを作るので、はるかに高速でした。
+Pre-net（2層FC + Dropout 0.5）はエンコーダ・デコーダ両方に置かれ、論文によれば**このドロップアウトが品質に決定的**（scheduled sampling よりも効果的）とのことです。
 
-## 波形化は Griffin-Lim
+## 波形化は Griffin-Lim:限界と次への伏線
 
-Tacotron が出すのはスペクトログラム(振幅情報)まで。そこから波形にするには**位相**を補う必要があり、Tacotron(v1)は古典的な **Griffin-Lim 法**を使いました。手軽ですが、ニューラルボコーダほどの音質は出ません。
+Griffin-Lim は古典的な位相推定法で、ニューラルボコーダではありません。手軽ですが音質には限界があり、「カチカチした」アーティファクトが残ります。論文では予測した振幅を1.2乗してからGriffin-Limに渡す工夫でアーティファクトを低減しています。
 
-だからこそ次の一手が分かりやすい。**この Griffin-Lim を [WaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats) ボコーダに差し替え、中間表現を[メルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram)にした**のが **Tacotron 2**。音質が一気に人間レベルへ近づきました([→音響モデルの記事](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats))。
+だからこそ次の一手が分かりやすい。**この Griffin-Lim を [WaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats) ボコーダに差し替え、中間表現を[メルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram)に特化させた**のが **[Tacotron 2](https://zenn.dev/nnn112358/articles/tacotron2-for-cats)**。MOS は 3.82 → **4.53** と人間レベルへ一気に近づきました。
 
 ## 意義と系譜
 
 Tacotron は、**ニューラルE2E TTS の起点**です。ここから、
 
-- **Tacotron 2**:メル + WaveNet で高音質化。自己回帰+Attention 系の代表に。
+- **[Tacotron 2](https://zenn.dev/nnn112358/articles/tacotron2-for-cats)**:メル + WaveNet + Location-Sensitive Attention で高音質化。
 - しかし Attention は**読み飛ばし・繰り返し**(アライメント崩壊)が起きやすい弱点も持ちます。これを決定的に解いたのが、[Glow-TTS](https://zenn.dev/nnn112358/articles/glow-tts-for-cats) / [VITS](https://zenn.dev/nnn112358/articles/vits-for-cats) の **[MAS](https://zenn.dev/nnn112358/articles/mas-for-cats)**(単調アライメント)や、[F5-TTS](https://zenn.dev/nnn112358/articles/f5-tts-for-cats) のフィラー方式でした。
 
 つまり Tacotron が示した「文字→音を丸ごと学ぶ」という発想が、その後のTTS([→系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits))すべての土台になっています。
@@ -81,18 +111,18 @@ Tacotron は、**ニューラルE2E TTS の起点**です。ここから、
 ## 猫のまとめ 🌮
 
 - Tacotron = **文字 →(seq2seq + Attention)→ スペクトログラム**をゼロから一括学習した、最初期のE2E TTS。
-- 多段パイプライン(フロントエンド+音響+ボコーダ)を1つのネットに畳み込んだのが革命的だった。
-- **Attention がアライメント(文字と音の対応)を自分で学ぶ**。CBHGで特徴抽出、フレーム単位で高速。
-- 波形化は **Griffin-Lim**。ここを WaveNet に替えたのが **Tacotron 2** で、高音質化。
-- Attention の暴走(読み飛ばし)問題は、後の **MAS** や **フィラー方式** が解決していく。E2E TTSの原点。
+- **CBHG**(Conv Bank + Highway + BiGRU)で特徴抽出、**Reduction Factor**(r=2)でデコーダを高速化。
+- **Attention がアライメント(文字と音の対応)を自分で学ぶ**。Pre-net の Dropout 0.5 が品質に決定的。
+- 波形化は **Griffin-Lim**(50回反復)。MOS **3.82**(当時の商用パラメトリック 3.69 を上回る）。
+- ここを WaveNet に替え、Attention を改良したのが **[Tacotron 2](https://zenn.dev/nnn112358/articles/tacotron2-for-cats)**(MOS 4.53）。E2E TTSの原点。
 
 「文字を入れたら音が出る」——今では当たり前のこの体験は、Tacotron から始まりました。🌮
 
 ## 参考リンク
 
 - [Tacotron (arXiv:1703.10135)](https://arxiv.org/abs/1703.10135) / [Tacotron 2 (arXiv:1712.05884)](https://arxiv.org/abs/1712.05884)
-- 関連記事: [猫でもわかる音響モデル(Tacotron 2)](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) / [猫でもわかるWaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats) / [猫でもわかるMAS](https://zenn.dev/nnn112358/articles/mas-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連記事: [猫でもわかるTacotron 2](https://zenn.dev/nnn112358/articles/tacotron2-for-cats) / [猫でもわかる音響モデル](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats) / [猫でもわかるWaveNet](https://zenn.dev/nnn112358/articles/wavenet-for-cats) / [猫でもわかるMAS](https://zenn.dev/nnn112358/articles/mas-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全27本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 次: [音響モデル(Tacotron 2)](https://zenn.dev/nnn112358/articles/acoustic-model-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全28本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 次: [Tacotron 2](https://zenn.dev/nnn112358/articles/tacotron2-for-cats)
 :::
