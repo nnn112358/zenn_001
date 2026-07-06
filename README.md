@@ -35,6 +35,8 @@
 - `articles/f5-tts-for-cats.md` — 猫でもわかるF5-TTS
 - `articles/fish-speech-for-cats.md` — 猫でもわかるFish-Speech
 - `articles/tacotron2-for-cats.md` — 猫でもわかるTacotron 2
+- `articles/fastspeech-for-cats.md` — 猫でもわかるFastSpeech
+- `articles/valle-for-cats.md` — 猫でもわかるVALL-E
 
 ## ローカルプレビュー
 

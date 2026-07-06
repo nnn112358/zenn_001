@@ -103,5 +103,5 @@ MobileNet 自体は画像向けですが、**depthwise separable 畳み込みと
 - 関連記事: [猫でもわかるVocos](https://zenn.dev/nnn112358/articles/vocos-for-cats) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全28本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [zero-shot TTS](https://zenn.dev/nnn112358/articles/zero-shot-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全30本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [zero-shot TTS](https://zenn.dev/nnn112358/articles/zero-shot-for-cats)
 :::
