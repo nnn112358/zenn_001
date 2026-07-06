@@ -1,5 +1,5 @@
 ---
-title: "猫でもわかるTTS 目次 ― 全30本の読む順ガイド"
+title: "猫でもわかるTTS 目次 ― 全32本の読む順ガイド"
 emoji: "🐾"
 type: "tech"
 topics: ["tts", "音声合成", "機械学習", "深層学習", "vits"]
@@ -10,7 +10,7 @@ published: false
 
 「猫でもわかる」は、TTS(音声合成)のしくみを、**1記事1テーマ**で、図と最小限の数式だけで解きほぐすシリーズです。各記事は独立して読めますが、順番に読むと「テキストが音になるまで」の全体像と、その裏にある生成モデルの考え方、そして最前線までが一本につながるように作ってあります。
 
-この記事はその**目次**です。全30本を、**3つの読むルート＋発展トピック**に分けて案内します。🐾
+この記事はその**目次**です。全32本を、**3つの読むルート＋発展トピック**に分けて案内します。🐾
 
 :::message
 各記事の技術的な主張は、元論文を実際に読んで確認した内容に基づいています。図はすべて自作(matplotlib / mermaid)です。俯瞰には姉妹記事「[VITSから見るTTS 10系統マップ(2016–2026)](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)」もどうぞ。
@@ -96,6 +96,8 @@ VITSを構成する生成モデルと部品を、1つずつ理解するルート
 | 27 | [Flow Matching](https://zenn.dev/nnn112358/articles/flow-matching-for-cats) | ノイズ→データへ「まっすぐ」進む生成 |
 | 28 | [F5-TTS](https://zenn.dev/nnn112358/articles/f5-tts-for-cats) | 継続長予測もテキストエンコーダも無しで喋る |
 | 29 | [Fish-Speech](https://zenn.dev/nnn112358/articles/fish-speech-for-cats) | 72万時間×DualAR、RVQもG2Pも捨てたLLM TTS |
+| 30 | [Grad-TTS](https://zenn.dev/nnn112358/articles/grad-tts-for-cats) | 拡散モデルで「ノイズからメルを彫り出す」TTS |
+| 31 | [MaskGCT](https://zenn.dev/nnn112358/articles/maskgct-for-cats) | マスク予測で完全非自己回帰の zero-shot TTS |
 
 ## こんな人はここから
 

@@ -191,5 +191,5 @@ flowchart LR
 - 関連記事: [猫でもわかるHiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) / [猫でもわかるメルスペクトログラム](https://zenn.dev/nnn112358/articles/what-is-mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全30本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [HiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) ／ 次: [Vocos](https://zenn.dev/nnn112358/articles/vocos-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全32本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [HiFi-GAN](https://zenn.dev/nnn112358/articles/hifigan-for-cats) ／ 次: [Vocos](https://zenn.dev/nnn112358/articles/vocos-for-cats)
 :::

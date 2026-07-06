@@ -191,5 +191,5 @@ VITSは、シリーズで学んだ部品の**総合芸術**です。
 - [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
 
 :::message
-🐾 **猫でもわかるTTSシリーズ**(全30本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Glow-TTS](https://zenn.dev/nnn112358/articles/glow-tts-for-cats) ／ 次: [VITS2](https://zenn.dev/nnn112358/articles/vits2-for-cats)
+🐾 **猫でもわかるTTSシリーズ**(全32本) ― [目次](https://zenn.dev/nnn112358/articles/tts-for-cats-index) ／ 前: [Glow-TTS](https://zenn.dev/nnn112358/articles/glow-tts-for-cats) ／ 次: [VITS2](https://zenn.dev/nnn112358/articles/vits2-for-cats)
 :::
