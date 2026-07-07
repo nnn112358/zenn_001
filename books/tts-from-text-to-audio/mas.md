@@ -4,9 +4,9 @@ title: "MAS ― VITSが外部ツールなしで音素と音を対応づけるし
 
 ## この章について
 
-[VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits)で、VITS の部品として **MAS(Monotonic Alignment Search / 単調アライメント探索)** を紹介しました。この章はその深掘りです。
+[VITS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/vits)で、VITS の部品として **MAS(Monotonic Alignment Search / 単調アライメント探索)** を紹介しました。この章はその深掘りです。
 
-前回の [SDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp) が「推論のとき、継続長を**生成する**」係だったのに対し、MAS は「学習のとき、正解のアライメント（＝どのフレームがどの音素か）を**見つける**」係。ちょうど対になる部品です。しかも **外部ツールに一切頼らず、動的計画法で自力で**それをやってのけます。解いていきます。🪜
+前回の [SDP](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/sdp) が「推論のとき、継続長を**生成する**」係だったのに対し、MAS は「学習のとき、正解のアライメント（＝どのフレームがどの音素か）を**見つける**」係。ちょうど対になる部品です。しかも **外部ツールに一切頼らず、動的計画法で自力で**それをやってのけます。解いていきます。🪜
 
 :::message
 MAS は Glow-TTS(Kim et al., 2020, [arXiv:2005.11129](https://arxiv.org/abs/2005.11129))で提案され、VITS([arXiv:2106.06103](https://arxiv.org/abs/2106.06103))に受け継がれました。本章の仕様は両論文で確認しています。図のうちアライメントの図は matplotlib(実際にMASの動的計画法を実装して描画)、フローチャートは mermaid です。
@@ -16,11 +16,11 @@ MAS は Glow-TTS(Kim et al., 2020, [arXiv:2005.11129](https://arxiv.org/abs/2005
 
 - MAS = 「どのフレームがどの音素に対応するか(アライメント)」を、**尤度が最大になる"単調な"対応**として**動的計画法**で探すアルゴリズム。
 - Tacotron の注意やFastSpeech の外部アライナーと違い、**外部ツール不要**で自力かつ**頑健**(スキップ・繰り返しが起きない)。
-- 見つけたアライメントから各音素の**継続長**が決まり、それが [SDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp) の学習目標にもなる。
+- 見つけたアライメントから各音素の**継続長**が決まり、それが [SDP](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/sdp) の学習目標にもなる。
 
 ## 何を解きたいのか:アライメント問題
 
-[音響モデルの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model)で見たとおり、TTS の中心的な難所は **短い音素列と長い音声フレーム列の対応づけ(アライメント)** です。「こんにちは」の `k` は何フレーム分？ `o` は？——これが分からないと、そもそも学習ができません。
+[音響モデルの章](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/acoustic-model)で見たとおり、TTS の中心的な難所は **短い音素列と長い音声フレーム列の対応づけ(アライメント)** です。「こんにちは」の `k` は何フレーム分？ `o` は？——これが分からないと、そもそも学習ができません。
 
 厄介なのは、**正解のアライメントはデータに付いていない**こと。音声とテキストのペアはあっても、「どの瞬間がどの音素か」というラベルは普通ありません。ここをどう埋めるかで、TTS の流派が分かれます。
 
@@ -79,7 +79,7 @@ flowchart LR
     classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
 ```
 
-ひとつは **継続長**。各音素が何フレームに対応したかを数えれば、それがそのまま継続長になり、[SDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp) が「継続長を予測できる」ように学習するための**教師データ**になります。つまり **MAS が学習時に正解の継続長を用意し、SDP がそれを推論時に自力で生成できるよう練習する**、という綺麗な役割分担です。もうひとつは **KL 損失**で、テキスト側の事前分布をアライメントに沿ってフレーム長へ引き伸ばし、音声側の分布と突き合わせるのに使います([→VITSのKL](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits))。
+ひとつは **継続長**。各音素が何フレームに対応したかを数えれば、それがそのまま継続長になり、[SDP](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/sdp) が「継続長を予測できる」ように学習するための**教師データ**になります。つまり **MAS が学習時に正解の継続長を用意し、SDP がそれを推論時に自力で生成できるよう練習する**、という綺麗な役割分担です。もうひとつは **KL 損失**で、テキスト側の事前分布をアライメントに沿ってフレーム長へ引き伸ばし、音声側の分布と突き合わせるのに使います([→VITSのKL](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/vits))。
 
 :::message
 Glow-TTS では MAS は「厳密な対数尤度」を最大化するアライメントを探します。VITS の目的関数は尤度ではなく ELBO なので、論文では **MASを「ELBOを最大化するアライメント（＝潜在変数 z の対数尤度を最大化するアライメント）を探す」ように再定義**しています。やっていることの骨格は同じです。
@@ -93,10 +93,10 @@ Glow-TTS では MAS は「厳密な対数尤度」を最大化するアライメ
 - 学習ループの中で反復的に使われ、見つけたアライメントは **継続長(SDPの教師)** と **KL損失の対応づけ** に使われる。
 - Glow-TTS 発、VITS が ELBO 版に再定義して継承。
 
-学習時に正解を「探す」MAS と、推論時に多様さを「生成する」[SDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp)。この2つが揃って、VITS はアライメントの問題を外部に頼らず自己完結で解いています。
+学習時に正解を「探す」MAS と、推論時に多様さを「生成する」[SDP](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/sdp)。この2つが揃って、VITS はアライメントの問題を外部に頼らず自己完結で解いています。
 
 ## 参考リンク
 
 - [Glow-TTS (arXiv:2005.11129)](https://arxiv.org/abs/2005.11129) ― MAS の提案
 - [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103) / 実装 [jaywalnut310/vits](https://github.com/jaywalnut310/vits)
-- 関連する章: [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [SDP](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/sdp) / [音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) / [Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)
+- 関連する章: [VITS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/vits) / [SDP](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/sdp) / [音響モデル](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/acoustic-model) / [Flow](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/flow)

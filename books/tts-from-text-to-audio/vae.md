@@ -4,7 +4,7 @@ title: "VAE ― VITSを支える\"V\"(VAE)を図で理解する"
 
 ## この章について
 
-前回の[Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)で、VITSを構成する「**VAE + Flow + GAN**」のうち "F" を解説しました。今回はその3本柱のひとつ、**VAE(変分オートエンコーダ / Variational Autoencoder)** です。
+前回の[Flow](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/flow)で、VITSを構成する「**VAE + Flow + GAN**」のうち "F" を解説しました。今回はその3本柱のひとつ、**VAE(変分オートエンコーダ / Variational Autoencoder)** です。
 
 :::message
 **用語の注意**:「VAE + Flow + GAN」はVITSを構成する3つの技術のこと。VITSの正式名称は **V**ariational **I**nference with adversarial learning for end-to-end **T**ext-to-**S**peech(頭文字は V・I・T・S)で、VAE+Flow+GAN の頭文字を並べたものではありません。
@@ -124,8 +124,8 @@ flowchart LR
 | モデル | サンプリング | 尤度 | ひとこと |
 |---|---|---|---|
 | **VAE** | 速い | 近似(ELBO) | エンコーダ+デコーダ。手軽だがぼやけやすい |
-| **GAN** | 速い | 計算できない | 尖鋭・高品質だが不安定(→[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)) |
-| **正規化フロー** | 速い(可逆) | **厳密** | 可逆制約・同次元(→[Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow)) |
+| **GAN** | 速い | 計算できない | 尖鋭・高品質だが不安定(→[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan)) |
+| **正規化フロー** | 速い(可逆) | **厳密** | 可逆制約・同次元(→[Flow](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/flow)) |
 | **拡散** | 遅い(多ステップ) | (変分) | 高品質だが反復が重い |
 
 VAEの弱点である「出力のぼやけ」は、しばしば**GANと組み合わせて**補われます。まさにVITSがそれです。
@@ -156,7 +156,7 @@ $$
 
 **VITS = VAE(骨格) + Flow(事前分布) + GAN(デコーダ学習)**
 
-ここまでの章([メル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram)・[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)・[Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow))が、**この1本の式に合流**します。VITSの "V" は、単なる飾りではなく屋台骨だったわけです。
+ここまでの章([メル](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/mel-spectrogram)・[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan)・[Flow](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/flow))が、**この1本の式に合流**します。VITSの "V" は、単なる飾りではなく屋台骨だったわけです。
 
 :::message
 VAEには離散版のいとこ **VQ-VAE**(潜在を"コードブック"の離散トークンにする)もいます。これが **SoundStream → EnCodec → DAC** というニューラルコーデックの源流になり、VALL-E などの **Codec LM** につながります(→[TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits))。VAEはTTSの至るところに顔を出します。
@@ -177,4 +177,4 @@ VAEには離散版のいとこ **VQ-VAE**(潜在を"コードブック"の離散
 - [Auto-Encoding Variational Bayes(VAE原論文, arXiv:1312.6114)](https://arxiv.org/abs/1312.6114)
 - [VQ-VAE: Neural Discrete Representation Learning (arXiv:1711.00937)](https://arxiv.org/abs/1711.00937)
 - [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103)
-- 関連する章: [Flow](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [Flow](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/flow) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

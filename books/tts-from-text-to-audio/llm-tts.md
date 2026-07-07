@@ -4,7 +4,7 @@ title: "LLM TTS ― 音声を「言語モデル」で喋らせるという発想
 
 ## この章について
 
-前回の [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) は「LLMに喋らせる」タイプのTTSでした。実はこれ、VALL-E や CosyVoice、Bark、XTTS…… と、近年の多くのモデルが共有する**大きな路線**の一員です。この章では、その **LLM TTS(コーデック言語モデル型TTS)** というパラダイムを、一段上から俯瞰します。
+前回の [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/qwen3-tts) は「LLMに喋らせる」タイプのTTSでした。実はこれ、VALL-E や CosyVoice、Bark、XTTS…… と、近年の多くのモデルが共有する**大きな路線**の一員です。この章では、その **LLM TTS(コーデック言語モデル型TTS)** というパラダイムを、一段上から俯瞰します。
 
 キーワードは **「音声生成を、言語モデル(LM)の問題として解く」**。GPT が次の単語を予測するのと同じ要領で、**次の"音声トークン"を予測**して喋る——この発想を、解きほぐします。🤖
 
@@ -45,7 +45,7 @@ flowchart LR
     classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
 ```
 
-1. **ニューラルコーデック(トークナイザ)**:連続的な音声波形を**離散トークン**に変換する部品([SoundStream / EnCodec](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec) / DAC / Mimi など。元をたどれば [VQ-VAE](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vae))。逆にトークンから波形も復元する。
+1. **ニューラルコーデック(トークナイザ)**:連続的な音声波形を**離散トークン**に変換する部品([SoundStream / EnCodec](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/encodec) / DAC / Mimi など。元をたどれば [VQ-VAE](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/vae))。逆にトークンから波形も復元する。
 2. **自己回帰LM(GPT風)**:デコーダ型 Transformer で、次のトークンを予測する本体。
 3. **条件づけ**:何を喋るかの**テキスト**(音素やBPE)と、誰の声かの**話者プロンプト**(数秒の参照音声)。
 
@@ -54,7 +54,7 @@ flowchart LR
 ここが LLM TTS のキモの一つ。音声トークンには、**性質の違う2種類**があります。
 
 - **意味トークン(semantic)**:**何を言っているか**を粗く捉える(HuBERT や w2v-BERT 由来)。文の内容・発音に対応。
-- **音響トークン(acoustic)**:**どう響くか**を細かく捉える([EnCodec](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec) / SoundStream 由来)。音色・韻律・話者性など。
+- **音響トークン(acoustic)**:**どう響くか**を細かく捉える([EnCodec](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/encodec) / SoundStream 由来)。音色・韻律・話者性など。
 
 この二段構造を最初に確立したのが **AudioLM**(2022, Google)です。AudioLM 自体はテキスト入力を持たない「音声の続きを生成する」モデルですが、**意味トークンで大枠を作り→音響トークンで肉付けする(粗→細)** という設計パターンを示し、VALL-E 以降の LLM TTS すべてに引き継がれました。人間が聴いても合成音声と見分けがつかない（判別率 51.2%＝ほぼ偶然）という衝撃の結果も出しています。
 
@@ -81,7 +81,7 @@ flowchart LR
 
 ## 多コードブックの捌き方:3つの戦略
 
-コーデックは普通、[RVQ(残差ベクトル量子化)](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec)で**複数のコードブック**(層)を持ちます。EnCodec なら8層、SoundStream なら12層。全部を素直に自己回帰すると**遅すぎる**ので、各モデルは工夫します。
+コーデックは普通、[RVQ(残差ベクトル量子化)](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/encodec)で**複数のコードブック**(層)を持ちます。EnCodec なら8層、SoundStream なら12層。全部を素直に自己回帰すると**遅すぎる**ので、各モデルは工夫します。
 
 ![多コードブックの3つの生成戦略](/images/llmtts-codebook.png)
 *A. AR+NAR(VALL-E): 1層目だけ自己回帰(時間方向に順に)、残りは一括で並列生成。B. Masked Generative(SoundStorm/MaskGCT): マスクされたトークンを信頼度順に段階的に埋める。並列なので高速(SoundStormは30秒の音声を0.5秒で生成)。C. MTP(Qwen3-TTS): 1ステップで全コードブックを同時に予測し、フレーム方向に進む。超低遅延(97ms)。*
@@ -90,13 +90,13 @@ flowchart LR
 |---|---|---|---|
 | **AR + NAR** | VALL-E | 遅め | 1層目は自己回帰、残りは並列 |
 | **Masked** | SoundStorm / MaskGCT | **高速** | マスクを段階的に埋める(MaskGIT風) |
-| **MTP** | [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) | **超低遅延** | 全層を1ステップで予測 |
+| **MTP** | [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/qwen3-tts) | **超低遅延** | 全層を1ステップで予測 |
 
-なお [Fish-Speech](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech) は RVQ ではなく **GFSQ(Grouped Finite Scalar Quantization)** という独自の量子化を使い、意味/音響の二段分割自体を避けています。DualAR(Slow + Fast の2段 Transformer）で高速かつ安定。G2P も不要で、LLM がテキストを直接処理します（[→Fish-Speechの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech)）。
+なお [Fish-Speech](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/fish-speech) は RVQ ではなく **GFSQ(Grouped Finite Scalar Quantization)** という独自の量子化を使い、意味/音響の二段分割自体を避けています。DualAR(Slow + Fast の2段 Transformer）で高速かつ安定。G2P も不要で、LLM がテキストを直接処理します（[→Fish-Speechの章](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/fish-speech)）。
 
 ## 弱点
 
-- **遅い**:1トークンずつの自己回帰は、[WaveNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/wavenet) と同じで逐次生成。ストリーミングやNAR化で緩和するが、VITS系の並列生成にはかなわない。
+- **遅い**:1トークンずつの自己回帰は、[WaveNet](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/wavenet) と同じで逐次生成。ストリーミングやNAR化で緩和するが、VITS系の並列生成にはかなわない。
 - **不安定**:LMなので**繰り返し・飛ばし・言い間違い**(誤りの蓄積)が起きやすい。MaskGCT は完全NARにすることでこの問題を回避しています。
 - **コーデック依存**:トークナイザの品質が上限を決める。
 
@@ -128,7 +128,7 @@ flowchart LR
 | 安定性 | **高い** | 繰り返し/飛ばしが出やすい |
 | スケール感 | 中 | **大**(LLMの恩恵) |
 
-どちらが上というより、**得意が違う**。安定・高速なら [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) 系、zero-shot や大規模なら LLM TTS、という住み分けです。最近は CosyVoice のように **LM + [Flow Matching](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow-matching)** のハイブリッドも増えています。
+どちらが上というより、**得意が違う**。安定・高速なら [VITS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/vits) 系、zero-shot や大規模なら LLM TTS、という住み分けです。最近は CosyVoice のように **LM + [Flow Matching](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/flow-matching)** のハイブリッドも増えています。
 
 ## まとめ 🤖
 
@@ -144,4 +144,4 @@ flowchart LR
 
 - [VALL-E (arXiv:2301.02111)](https://arxiv.org/abs/2301.02111) / [AudioLM (arXiv:2209.03143)](https://arxiv.org/abs/2209.03143) / [SoundStorm (arXiv:2305.09636)](https://arxiv.org/abs/2305.09636)
 - [MaskGCT (arXiv:2409.00750)](https://arxiv.org/abs/2409.00750) / [Fish-Speech (arXiv:2411.01156)](https://arxiv.org/abs/2411.01156)
-- 関連する章: [EnCodec](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec) / [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) / [VITS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vits) / [VAE](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/vae) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [EnCodec](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/encodec) / [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/qwen3-tts) / [VITS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/vits) / [VAE](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/vae) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

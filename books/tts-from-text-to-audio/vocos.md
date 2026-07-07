@@ -4,7 +4,7 @@ title: "Vocos ― フーリエで一発、HiFi-GAN級を桁違いに速く"
 
 ## この章について
 
-[iSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet)の最後で、「iSTFTNet が諦めた"全部 iSTFT 化"を、良い骨格で克服したのが **Vocos**」と紹介しました。この章はその Vocos の話です。
+[iSTFTNet](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/istftnet)の最後で、「iSTFTNet が諦めた"全部 iSTFT 化"を、良い骨格で克服したのが **Vocos**」と紹介しました。この章はその Vocos の話です。
 
 Vocos(2023)は、**HiFi-GAN と同等の音質を、桁違いに速く**出すフーリエ系ボコーダ。カギは「**ネットワークを高い解像度で走らせない**」という発想の転換にあります。図で解いていきます。🌀
 
@@ -20,7 +20,7 @@ Vocos: Siuzdak, *"Vocos: Closing the gap between time-domain and Fourier-based n
 
 ## おさらい:時間領域ボコーダの「ムダ」
 
-[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) のような時間領域のボコーダは、メル(低い時間解像度)を **転置畳み込みで少しずつ引き伸ばし**、波形(高い解像度)まで持っていきます。数百倍のアップサンプルをネットワークの中で行うため、**後半は高い解像度で重い計算**を回すことになり、エイリアシング(折り返し雑音)も起きやすい。ここに改善の余地があります。
+[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan) のような時間領域のボコーダは、メル(低い時間解像度)を **転置畳み込みで少しずつ引き伸ばし**、波形(高い解像度)まで持っていきます。数百倍のアップサンプルをネットワークの中で行うため、**後半は高い解像度で重い計算**を回すことになり、エイリアシング(折り返し雑音)も起きやすい。ここに改善の余地があります。
 
 ## Vocosのアイデア:解像度そのまま + iSTFTで一発
 
@@ -57,14 +57,14 @@ flowchart LR
     classDef gray fill:#f3f4f6,stroke:#6b7280,stroke-width:2px,color:#111827
 ```
 
-- **骨格は ConvNeXt**:低解像度のまま処理するので、時間領域ボコーダで定番の拡張畳み込み([→WaveNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/wavenet))は不要。画像で成功した ConvNeXt ブロック(深さ方向畳み込み＋逆ボトルネック)を使います。
+- **骨格は ConvNeXt**:低解像度のまま処理するので、時間領域ボコーダで定番の拡張畳み込み([→WaveNet](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/wavenet))は不要。画像で成功した ConvNeXt ブロック(深さ方向畳み込み＋逆ボトルネック)を使います。
 - **Fourierヘッド**:各周波数ビンについて、振幅 $M = \exp(m)$ と位相を出力し、複素スペクトルを組み立てます。あとは逆STFTで波形へ。
 
-学習は [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) と同じレシピ——**識別器(MPD + 多重解像度識別器 MRD)**、**メル再構成損失**、**特徴マッチング損失**——ただし敵対的損失は最小二乗ではなく **hinge損失**を使います。
+学習は [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan) と同じレシピ——**識別器(MPD + 多重解像度識別器 MRD)**、**メル再構成損失**、**特徴マッチング損失**——ただし敵対的損失は最小二乗ではなく **hinge損失**を使います。
 
 ## iSTFTNet との関係(なぜ克服できたか)
 
-[iSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet) も「終盤を iSTFT に置き換える」発想でしたが、**最後の2ブロックしか置き換えられず、それ以上やると品質が急落**しました(残りは転置畳み込みのまま)。Vocos はこの壁を、**ConvNeXt という良い骨格でフレームレートのまま高解像度スペクトルを直接予測**することで突破し、**アップサンプルを完全に廃止**しました。
+[iSTFTNet](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/istftnet) も「終盤を iSTFT に置き換える」発想でしたが、**最後の2ブロックしか置き換えられず、それ以上やると品質が急落**しました(残りは転置畳み込みのまま)。Vocos はこの壁を、**ConvNeXt という良い骨格でフレームレートのまま高解像度スペクトルを直接予測**することで突破し、**アップサンプルを完全に廃止**しました。
 
 | | HiFi-GAN | iSTFTNet | **Vocos** |
 |---|---|---|---|
@@ -74,7 +74,7 @@ flowchart LR
 
 ## どれくらい速い?
 
-論文の評価では、Vocos は **HiFi-GAN の約13倍、BigVGAN の約70倍**の速度(とくにGPUなしで顕著)。それでいて**音質はSOTAと同等**。「速さと品質はトレードオフ」を、フーリエ表現という良い"型"の力で崩したわけです([→実測でも Vocos は CPU 最速級でした](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan))。
+論文の評価では、Vocos は **HiFi-GAN の約13倍、BigVGAN の約70倍**の速度(とくにGPUなしで顕著)。それでいて**音質はSOTAと同等**。「速さと品質はトレードオフ」を、フーリエ表現という良い"型"の力で崩したわけです([→実測でも Vocos は CPU 最速級でした](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan))。
 
 ## まとめ 🌀
 
@@ -89,4 +89,4 @@ flowchart LR
 ## 参考リンク
 
 - [Vocos (arXiv:2306.00814)](https://arxiv.org/abs/2306.00814) / 実装 [gemelo-ai/vocos](https://github.com/gemelo-ai/vocos)
-- 関連する章: [iSTFTNet](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/istftnet) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [iSTFTNet](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/istftnet) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/mel-spectrogram) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

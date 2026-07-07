@@ -4,7 +4,7 @@ title: "WaveNet ― ニューラルボコーダの元祖を図で理解する"
 
 ## この章について
 
-[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)や[TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)で、ボコーダの系譜を「**WaveNet** → WaveRNN → … → HiFi-GAN」と何度もたどってきました。この章は、その**いちばん根っこ**にある WaveNet の話です。
+[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan)や[TTS系譜マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)で、ボコーダの系譜を「**WaveNet** → WaveRNN → … → HiFi-GAN」と何度もたどってきました。この章は、その**いちばん根っこ**にある WaveNet の話です。
 
 WaveNet(2016, DeepMind)は、**生の音声波形をニューラルネットで直接生成する**という発想を確立した、ニューラルボコーダの元祖。当時の音声合成を一気に「人間並み」に近づけた立役者です。中心にあるのは **自己回帰** と **拡張因果畳み込み** という2つのアイデア。図で解いていきます。🌊
 
@@ -20,7 +20,7 @@ WaveNet: van den Oord et al., *"WaveNet: A Generative Model for Raw Audio"* (201
 
 ## 何をしたいのか
 
-音声は、1秒あたり16,000〜24,000個ものサンプル(数値)の列です([→メルの章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram))。WaveNet の目標は、この**生の波形を、音声らしく1個ずつ並べていく**こと。画像を1画素ずつ、文章を1単語ずつ生成する自己回帰モデルの、音声版だと思ってください。
+音声は、1秒あたり16,000〜24,000個ものサンプル(数値)の列です([→メルの章](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/mel-spectrogram))。WaveNet の目標は、この**生の波形を、音声らしく1個ずつ並べていく**こと。画像を1画素ずつ、文章を1単語ずつ生成する自己回帰モデルの、音声版だと思ってください。
 
 ## WaveNetのアイデア:1サンプルずつの自己回帰
 
@@ -56,7 +56,7 @@ WaveNet は2つの工夫でこれを解決します。
 
 ## ボコーダとしての使い方:条件づけ
 
-ここまでは「それらしい音声を勝手に作る」話でした。実際の TTS では、**何を喋るか**を指定する必要があります。そこで WaveNet を、**言語特徴やメルスペクトログラムで条件づけ**します。これを **local conditioning** と呼び、これによって WaveNet は「メル → 波形」の**ボコーダ**になります。[Tacotron 2](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) は、まさに音響モデルの出したメルを WaveNet に渡して音声にしていました。
+ここまでは「それらしい音声を勝手に作る」話でした。実際の TTS では、**何を喋るか**を指定する必要があります。そこで WaveNet を、**言語特徴やメルスペクトログラムで条件づけ**します。これを **local conditioning** と呼び、これによって WaveNet は「メル → 波形」の**ボコーダ**になります。[Tacotron 2](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/acoustic-model) は、まさに音響モデルの出したメルを WaveNet に渡して音声にしていました。
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
@@ -77,7 +77,7 @@ flowchart LR
 
 WaveNet は品質こそ画期的でしたが、大きな弱点がありました。**1サンプルずつ順番に生成する**ため、1秒の音声に何万回もネットワークを走らせる必要があり、**推論がとても遅い**のです(学習は並列にできますが、生成は逐次)。
 
-この「遅さ」を克服することが、その後のボコーダ研究の大きなテーマになりました。サンプルをまとめて速く出す **WaveRNN**、教師 WaveNet を並列モデルへ蒸留する **Parallel WaveNet**、フローで一気に生成する **WaveGlow**、そして敵対的学習で高速・高品質を両立した **[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)** ——いずれも「WaveNet 級の品質を、もっと速く」を目指した子孫たちです。
+この「遅さ」を克服することが、その後のボコーダ研究の大きなテーマになりました。サンプルをまとめて速く出す **WaveRNN**、教師 WaveNet を並列モデルへ蒸留する **Parallel WaveNet**、フローで一気に生成する **WaveGlow**、そして敵対的学習で高速・高品質を両立した **[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan)** ——いずれも「WaveNet 級の品質を、もっと速く」を目指した子孫たちです。
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{'lineColor':'#475569','fontFamily':'Noto Sans CJK JP, sans-serif','fontSize':'15px'},'flowchart':{'padding':14,'nodeSpacing':50,'rankSpacing':60,'curve':'linear'}}}%%
@@ -102,4 +102,4 @@ flowchart LR
 ## 参考リンク
 
 - [WaveNet (arXiv:1609.03499)](https://arxiv.org/abs/1609.03499)
-- 関連する章: [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [音響モデル](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/acoustic-model) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)
+- 関連する章: [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/mel-spectrogram) / [音響モデル](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/acoustic-model) / [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)

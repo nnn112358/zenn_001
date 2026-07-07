@@ -118,7 +118,7 @@ flowchart LR
 
 | モデル | サンプリング | 尤度 | ひとこと |
 |---|---|---|---|
-| **GAN** | 速い(1回) | 計算できない | 敵対的・不安定だが高品質(→[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)) |
+| **GAN** | 速い(1回) | 計算できない | 敵対的・不安定だが高品質(→[HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan)) |
 | **VAE** | 速い | 近似(ELBO) | 手軽だがぼやけやすい |
 | **正規化フロー** | 速い(可逆) | **厳密** | 可逆制約・入出力が同次元・多層必要 |
 | **拡散** | 遅い(多ステップ) | (変分) | 高品質だが反復が重い |
@@ -149,7 +149,7 @@ flowchart LR
 | 学習 | 変数変換で厳密な尤度を最大化 | ベクトル場(速度場)を回帰(simulation-free) |
 | 代表 | Glow-TTS, VITS, WaveGlow | Voicebox, Matcha-TTS, **F5-TTS** |
 
-どちらも「ノイズをデータに変換する」点は同じですが、**中の仕組みはまったく別物**です。「flow」という単語だけで同一視しないよう注意(→系譜は[TTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)参照)。厳密には Flow Matching は「連続正規化フロー(CNF)」を効率よく学習する手法、という位置づけです。詳しくは[Flow Matching](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow-matching)で解説しています。
+どちらも「ノイズをデータに変換する」点は同じですが、**中の仕組みはまったく別物**です。「flow」という単語だけで同一視しないよう注意(→系譜は[TTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits)参照)。厳密には Flow Matching は「連続正規化フロー(CNF)」を効率よく学習する手法、という位置づけです。詳しくは[Flow Matching](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/flow-matching)で解説しています。
 
 ## まとめ 🐈‍⬛
 
@@ -166,4 +166,4 @@ flowchart LR
 - [Glow: Generative Flow with Invertible 1×1 Convolutions (arXiv:1807.03039)](https://arxiv.org/abs/1807.03039)
 - [RealNVP: Density estimation using Real NVP (arXiv:1605.08803)](https://arxiv.org/abs/1605.08803)
 - [Glow-TTS (arXiv:2005.11129)](https://arxiv.org/abs/2005.11129) / [VITS (arXiv:2106.06103)](https://arxiv.org/abs/2106.06103) / [WaveGlow (arXiv:1811.00002)](https://arxiv.org/abs/1811.00002)
-- 関連する章: [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/mel-spectrogram) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/hifigan)
+- 関連する章: [VITSから見るTTS 10系統マップ](https://zenn.dev/nnn112358/articles/tts-lineage-map-from-vits) / [メルスペクトログラム](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/mel-spectrogram) / [HiFi-GAN](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/hifigan)

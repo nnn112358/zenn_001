@@ -4,7 +4,7 @@ title: "MaskGCT ― マスク予測で「完全非自己回帰」の zero-shot T
 
 ## この章について
 
-[LLM TTS の章](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/llm-tts)で、音声トークンの生成戦略には **AR+NAR**([VALL-E](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/valle))、**マスク予測**(SoundStorm)、**MTP**([Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts))の3つがあると紹介しました。今回はそのマスク予測方式を極めた **MaskGCT**(2024, CUHK Shenzhen)を見ます。
+[LLM TTS の章](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/llm-tts)で、音声トークンの生成戦略には **AR+NAR**([VALL-E](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/valle))、**マスク予測**(SoundStorm)、**MTP**([Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/qwen3-tts))の3つがあると紹介しました。今回はそのマスク予測方式を極めた **MaskGCT**(2024, CUHK Shenzhen)を見ます。
 
 MaskGCT は**テキスト→意味トークン → 音響トークンの両段階をマスク予測**で解いた、**完全非自己回帰** の zero-shot TTS です。明示的なテキスト-音声アライメントも、音素レベルの継続長予測も不要。それでいて**人間の録音を上回る自然さ**(CMOS +0.10 vs GT)を達成しています。
 
@@ -20,7 +20,7 @@ MaskGCT: Wang et al., *"MaskGCT: Zero-Shot Text-to-Speech with Masked Generative
 
 ## マスク予測とは
 
-[VALL-E](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/valle) の AR は「左から右に1つずつ生成」でした。マスク予測は発想が違います。
+[VALL-E](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/valle) の AR は「左から右に1つずつ生成」でした。マスク予測は発想が違います。
 
 1. **全トークンをマスク**(隠す)した状態から始める。
 2. モデルが**全位置を同時に予測**する。
@@ -96,7 +96,7 @@ flowchart TB
 
 ### 継続長予測
 
-MaskGCT にも継続長予測はありますが、**音素単位ではなく文全体の長さ**だけを決めます。[Flow Matching](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/flow-matching) ベースの 12層 Transformer で予測。これにより**音素レベルのアライメントが完全に不要**になりました。
+MaskGCT にも継続長予測はありますが、**音素単位ではなく文全体の長さ**だけを決めます。[Flow Matching](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/flow-matching) ベースの 12層 Transformer で予測。これにより**音素レベルのアライメントが完全に不要**になりました。
 
 ## なぜ AR+NAR より強いか
 
@@ -155,7 +155,7 @@ flowchart LR
 VALL-E が開いた「音声トークンの言語モデリング」に対する3つの回答:
 - **AR+NAR**: VALL-E → VALL-E 2(human parity)
 - **マスク予測**: SoundStorm → **MaskGCT**(完全非自己回帰)
-- **MTP / DualAR**: [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts) / [Fish-Speech](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech)
+- **MTP / DualAR**: [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/qwen3-tts) / [Fish-Speech](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/fish-speech)
 
 MaskGCT は「AR を一切使わない」という選択で、頑健性と品質を両立した到達点です。
 
@@ -170,4 +170,4 @@ MaskGCT は「AR を一切使わない」という選択で、頑健性と品質
 ## 参考リンク
 
 - [MaskGCT (arXiv:2409.00750)](https://arxiv.org/abs/2409.00750) / [SoundStorm (arXiv:2305.09636)](https://arxiv.org/abs/2305.09636)
-- 関連する章: [LLM TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/llm-tts) / [VALL-E](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/valle) / [EnCodec](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/encodec) / [Fish-Speech](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/fish-speech) / [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-for-cats/viewer/qwen3-tts)
+- 関連する章: [LLM TTS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/llm-tts) / [VALL-E](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/valle) / [EnCodec](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/encodec) / [Fish-Speech](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/fish-speech) / [Qwen3-TTS](https://zenn.dev/nnn112358/books/tts-from-text-to-audio/viewer/qwen3-tts)
