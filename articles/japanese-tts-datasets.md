@@ -3,7 +3,7 @@ title: "日本語TTSのためのデータセット選び"
 emoji: "🗂️"
 type: "tech"
 topics: ["tts", "音声合成", "データセット", "日本語", "コーパス"]
-published: false
+published: true
 ---
 
 ## この記事について
