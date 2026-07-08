@@ -4,13 +4,17 @@
 
 ## 本
 
-- `books/tts-for-cats/` — **猫でもわかるTTS ― テキストが音になるまで**（全31章、無料）
+- `books/tts-from-text-to-audio/` — **TTS ― テキストが音になるまで**（全31章、無料）
 
 ## 記事
 
 - `articles/first-openjtalk.md` — はじめてのOpenJTalk
 - `articles/gpu-for-tts-training.md` — TTS学習向けのGPUの選び方
 - `articles/tts-lineage-map-from-vits.md` — VITSから見るTTS 10系統マップ(2016–2026)
+- `articles/japanese-tts-datasets.md` — 日本語TTSのためのデータセット選び
+- `articles/tts-evaluation-metrics.md` — TTSの評価指標カタログ
+- `articles/neural-audio-codecs.md` — 音声トークナイザ徹底比較
+- `articles/streaming-tts.md` — リアルタイム(ストリーミング)TTSの仕組み
 
 ## ローカルプレビュー
 
